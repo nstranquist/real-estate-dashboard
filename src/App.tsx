@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// import components
+import BaseLayout from './components/core'
+import Signup from './components/Auth/Signup'
+import Login from './components/Auth/Login'
+import PrivateRoute from './utils/PrivateRoute'
 
-export default App;
+const App: React.FC = () => (
+  <Router>
+    <Switch>
+      <Route exact path='/signup' component={Signup} />
+      <Route exact path='/login' component={Login} />
+      <PrivateRoute exact={true} path='/home' component={BaseLayout} />
+      <Route path='/' render={() => <Redirect to='/login' />} />
+    </Switch>
+  </Router>
+)
+
+export default App
+
+// const contentStyle = {
+//   padding: 24,
+//   background: '#fff',
+//   minHeight: 360,
+//   height: '100%'
+// }
