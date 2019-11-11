@@ -2,13 +2,14 @@
 import { UserDataState, UserDataTypes } from './types'
 
 const initialUserDataState: UserDataState = {
-  myProperties: [],
-  matchedProperties: [],
-  mySchools: [],
-  //matchedSchools: [],
-  school: '',
   email: '',
-  name: '',
+  firstName: '',
+  lastName: '',
+  company: '',
+  myProperties: [],
+  myInvestors: [],
+  matchedProperties: [],
+  matchedInvestors: [],
   loadingUserData: false,
   loadingUserStaticData: false,
   errors: null,
@@ -36,7 +37,7 @@ export default (
       console.log('setting user realtime data')
       return {
         ...state,
-        mySchools: action.mySchools,
+        myInvestors: action.myInvestors,
         myProperties: action.myProperties,
         matchedProperties: action.matchedProperties,
         loadingUserData: false
@@ -46,7 +47,7 @@ export default (
         console.log('setting user static data')
         return {
           ...state,
-          school: action.school,
+          company: action.company,
           loadingUserStaticData: false,
           errors: null,
         }
@@ -55,8 +56,8 @@ export default (
       return {
         ...state,
       }
-    case 'TOGGLE_FAVORITE_SCHOOL':
-      // add action.id to mySchools
+    case 'TOGGLE_FAVORITE_INVESTOR':
+      // add action.id to myInvestors
       return {
         ...state,
       }

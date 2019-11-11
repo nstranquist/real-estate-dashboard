@@ -21,7 +21,6 @@ export const attemptLogin = (email: string, password: string) => (dispatch: Disp
     .catch((err: any) => {
       console.log('signin error: ', err.message)
       dispatch({ type: 'SET_AUTH_ERROR', err})
-      alert("Oops. Invalid log in.");
     })
 }
 export const logout = () => (dispatch: Dispatch) => {
@@ -54,7 +53,8 @@ export const attemptSignup = (firstName: string, lastName: string, email: string
         .set({
           uid: userCreds.user!.uid,
           firstName,
-          lastName
+          lastName,
+          email: userCreds.user!.email
         })
         .catch(err => console.log(err))
     })
@@ -62,6 +62,12 @@ export const attemptSignup = (firstName: string, lastName: string, email: string
       console.log('signup failed: ', err)
       dispatch({ type: 'SET_AUTH_ERROR', err })
     })
+}
+export const clearAuthErrors = () => (dispatch: Dispatch) => {
+  dispatch({ type: 'CLEAR_AUTH_ERRORS' })
+}
+export const authenticateUser = () => (dispatch: Dispatch) => {
+  dispatch({ type: 'AUTHENTICATE' })
 }
 
 /*

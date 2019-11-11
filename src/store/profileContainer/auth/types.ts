@@ -13,6 +13,7 @@ export interface SetAuthError {
 
 export type AuthActionTypes =
 | { readonly type: 'LOADING_AUTH' }
+| { readonly type: 'CLEAR_AUTH_ERRORS' }
 | { readonly type: 'AUTHENTICATE' }
 | { readonly type: 'UNAUTHENTICATE' }
 | SetAuthError

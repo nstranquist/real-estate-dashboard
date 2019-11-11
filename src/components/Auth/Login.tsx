@@ -6,7 +6,7 @@ import Button from "../../shared-components/button";
 import SignInStyleWrapper from "../../styles/signin.style";
 import Spin from "../../styles/spin.style";
 
-import { attemptLogin } from '../../store/profileContainer/auth/actions'
+import { attemptLogin, clearAuthErrors } from '../../store/profileContainer/auth/actions'
 import { RootState } from "../../store/root";
 
 interface IProps {
@@ -14,13 +14,15 @@ interface IProps {
   loadingAuth: boolean
   loginError: any
   attemptLogin(email: string, password: string): void
+  clearAuthErrors(): void
 }
 
 const SignIn: React.FC<IProps> = ({
   isAuth,
   loadingAuth,
   loginError,
-  attemptLogin
+  attemptLogin,
+  clearAuthErrors,
 }) => {
   //const [redirectToReferrer, setRedirectToReferrer] = useState(false)
   const [email, setEmail] = useState('')
@@ -28,11 +30,8 @@ const SignIn: React.FC<IProps> = ({
 
   useEffect(() => {
     console.log('called useEffect')
+    clearAuthErrors()
   }, [])
-
-  //if(isAuth === true) {
-  //  setRedirectToReferrer(true)
-  //}
 
   const handleLogin = (e: any) => {
     e.preventDefault()
@@ -133,7 +132,7 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(
   mapStateToProps,
-  { attemptLogin }
+  { attemptLogin, clearAuthErrors }
 )(SignIn);
 
 

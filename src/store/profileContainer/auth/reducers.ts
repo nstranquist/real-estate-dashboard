@@ -38,6 +38,11 @@ export default (
         loadingAuth: false,
         errors: action.err,
       }
+    case 'CLEAR_AUTH_ERRORS':
+      return {
+        ...state,
+        errors: null
+      }
     default:
       return state
   }

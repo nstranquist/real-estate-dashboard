@@ -6,6 +6,7 @@ import { Dispatch } from 'redux'
 //export const updateUserProfileData
 //export const updateUserPrivateData (backend?)
 export const getUserData = () => (dispatch: Dispatch) => {
+  console.log('get user data thunk here')
   dispatch({ type: 'LOADING_USER_DATA' })
   firestore
     .doc(`profiles/${auth.currentUser!.uid}`)
@@ -15,8 +16,9 @@ export const getUserData = () => (dispatch: Dispatch) => {
       dispatch({
         type: 'SET_USER_DATA',
         myProperties: doc.data()!.myProperties,
+        myInvestors: doc.data()!.myInvestors,
         matchedProperties: doc.data()!.matchedProperties,
-        mySchools: doc.data()!.mySchools,
+        matchedInvestors: doc.data()!.matchedInvestors,
       })
     }, (err) => {
       console.log('error: ', err)
@@ -32,9 +34,10 @@ export const getUserPrivateData = () => (dispatch: Dispatch) => {
       console.log('user data:', doc.data())
       dispatch({
         type: 'SET_USER_PRIVATE_DATA',
-        name: doc.data()!.name,
+        firstName: doc.data()!.firstName,
+        lastName: doc.data()!.lastName,
         email: doc.data()!.email,
-        school: doc.data()!.school
+        company: doc.data()!.company
       })
     })
     .catch(err => {

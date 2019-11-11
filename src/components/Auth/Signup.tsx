@@ -7,23 +7,26 @@ import Button from "../../shared-components/button";
 import SignUpStyleWrapper from "../../styles/signup.style";
 import Spin from "../../styles/spin.style";
 
-import { attemptSignup } from '../../store/profileContainer/auth/actions'
+import { attemptSignup, clearAuthErrors } from '../../store/profileContainer/auth/actions'
 import { RootState } from "../../store/root";
+
 
 interface IProps {
   isAuth: boolean
   loadingAuth: boolean
   signupError: any
   attemptSignup(firstName: string, lastName: string, email: string, password: string): void
+  clearAuthErrors(): void
 }
 
 const SignUp: React.FC<IProps> = ({
   isAuth,
   loadingAuth,
   signupError,
-  attemptSignup
+  attemptSignup,
+  clearAuthErrors,
 }) => {
-  const [redirectToReferrer, setRedirectToReferrer] = useState(false)
+  //const [redirectToReferrer, setRedirectToReferrer] = useState(false)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -32,16 +35,21 @@ const SignUp: React.FC<IProps> = ({
 
   useEffect(() => {
     console.log('called useEffect')
+    clearAuthErrors()
   }, [])
 
-  if(isAuth === true) {
-    setRedirectToReferrer(true)
-  }
-
-  const handleSignup = () => {
+  const handleSignup = (e: any) => {
+    e.preventDefault()
     console.log('signing up')
-    attemptSignup(firstName, lastName, email, password)
-    clearForm()
+    if(password === confPassword) {
+      attemptSignup(firstName, lastName, email, password)
+      clearForm()
+    } else {
+      setPassword('')
+      setConfPassword('')
+      console.log('error! passwords do not match')
+      alert('passwords must match')
+    }
   };
   const clearForm = () => { // is this needed? can test...
     setFirstName('')
@@ -49,11 +57,11 @@ const SignUp: React.FC<IProps> = ({
     setEmail('')
     setPassword('')
     setConfPassword('')
-    setRedirectToReferrer(false)
+    //setRedirectToReferrer(false)
   }
   const onKeyPress = (e: any) => { 
     if (e.which === 13) // 13 is the 'enter' key
-      handleSignup();
+      handleSignup(e);
   };
 
   //redirectToReferrer = this.state;
@@ -80,9 +88,9 @@ const SignUp: React.FC<IProps> = ({
     setLastName(value)
   };
     
-  const from = { pathname: "/dashboard" };
-  if (redirectToReferrer) {
-    return <Redirect to={from} />;
+  //const from = { pathname: "/dashboard" };
+  if (isAuth) {
+    return <Redirect to={'/home'} />;
   }
 
     return (
@@ -180,7 +188,7 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(
   mapStateToProps,
-  { attemptSignup }
+  { attemptSignup, clearAuthErrors }
 )(SignUp);
 
 

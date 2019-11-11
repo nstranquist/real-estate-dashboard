@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 
+import { auth } from '../../utils/firebaseHelper'
+
 const { Sider } = Layout
 const { SubMenu } = Menu
 
+// TODO: make sidebar wider, responsive for tablets, better button clicker
 const MySider = () => {
   const [collapsed, setCollapsed] = useState(false)
 
@@ -11,8 +14,13 @@ const MySider = () => {
     setCollapsed(!collapsed)
   }
 
+  const handleLogout = (e: any) => {
+    e.preventDefault()
+    auth.signOut()
+  }
+
   return (
-    <Sider
+    <Sider style={{position:'relative'}}
       breakpoint="lg"
       collapsedWidth="0"
       onBreakpoint={broken => {
@@ -56,6 +64,13 @@ const MySider = () => {
           <span className="nav-text">Favorites</span>
         </Menu.Item>
       </Menu>
+      <div style={{color:'white', fontSize:'1.5rem', textAlign:'center',
+        width: '90%', marginLeft: '5%', padding:'2px',
+        position:'absolute', bottom:'15px', cursor:'pointer',
+        background:'rgba(255,255,255,.2)', }}
+        onClick={(e) => handleLogout(e)}>
+        Logout
+      </div>
     </Sider>
   )
 }

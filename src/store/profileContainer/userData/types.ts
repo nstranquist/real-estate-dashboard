@@ -1,37 +1,42 @@
 
 export interface UserDataState {
-  name: string,
+  firstName: string,
+  lastName: string,
   email: string,
-  school?: string,
+  company?: string,
   loadingUserData: boolean
   loadingUserStaticData: boolean
-  mySchools: number[] | null
   myProperties: number[] | null
+  myInvestors: number[] | null
   matchedProperties: number[] | null
-  //machedSchools: string[] | null
+  matchedInvestors: string[] | null
   errors: any[] | null
 }
 
 // realtime data
 export interface SetUserData {
   readonly type: 'SET_USER_DATA'
-  mySchools: number[] | null
+  myInvestors: number[] | null
   myProperties: number[] | null
   matchedProperties: number[] | null
+  matchedInvestors: number[] | null
 }
 // static data
 export interface SetUserPrivateData {
   readonly type: 'SET_USER_PRIVATE_DATA'
-  name: string
+  firstName: string
+  lastName: string
   email: string
-  school?: string
+  company?: string
+  // profile url
+  // other stats
 }
 export interface ToggleFavoriteProperty {
   readonly type: 'TOGGLE_FAVORITE_PROPERTY'
   index: number
 }
-export interface ToggleFavoriteSchool {
-  readonly type: 'TOGGLE_FAVORITE_SCHOOL'
+export interface ToggleFavoriteInvestor {
+  readonly type: 'TOGGLE_FAVORITE_INVESTOR'
   index: number
 }
 export interface SetUserDataError {
@@ -45,5 +50,5 @@ export type UserDataTypes =
 | SetUserData
 | SetUserPrivateData
 | ToggleFavoriteProperty
-| ToggleFavoriteSchool
+| ToggleFavoriteInvestor
 | SetUserDataError
