@@ -11,7 +11,7 @@ const LogoutBtn = styled.div`
   text-align: center;
   width: 90%;
   margin-left: 5%;
-  padding: 2px;
+  padding: 3px;
   border-radius: 1px;
   position: absolute;
   bottom: 15px;
@@ -36,6 +36,7 @@ interface IProps {
 const MySider: React.FC<IProps> = ({
   userName
 }) => {
+  console.log('userName value:', userName)
   const [collapsed, setCollapsed] = useState(false)
 
   const onCollapsed = () => {
@@ -59,7 +60,7 @@ const MySider: React.FC<IProps> = ({
         onCollapsed()
       }}
     >
-      <div className="logo" >
+      <div style={{textAlign: 'center'}}>
         <Link to='/home' style={logoStyle}>
           <span style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.4)" }}>
             {userName}</span></Link>
@@ -103,10 +104,11 @@ const MySider: React.FC<IProps> = ({
 export default MySider
 
 const logoStyle = {
-  height: "32px",
-  //background: "rgba(255, 255, 255, 0.2)",
-  margin: "16px",
+  display: 'block',
+  margin: "5px auto",
+  padding: '5px 0',
   color: "white",
   fontFamily: 'sans-serif',
-  fontSize: 24,
+  fontSize: '24px',
+  //background: "rgba(255, 255, 255, 0.2)",
 }

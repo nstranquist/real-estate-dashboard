@@ -47,6 +47,8 @@ export default (
         console.log('setting user static data')
         return {
           ...state,
+          firstName: action.firstName,
+          lastName: action.lastName,
           company: action.company,
           loadingUserStaticData: false,
           errors: null,

@@ -43,7 +43,7 @@ const BaseLayout: React.FC<IProps> = ({
 }
 
 const mapStateToProps = (state: RootState) => ({
-  userName: (state.profile.userData.firstName.charAt(0) + state.profile.userData.lastName)
+  userName: (state.profile.userData.firstName.charAt(0) + ' ' + state.profile.userData.lastName)
 })
 
 export default connect(
