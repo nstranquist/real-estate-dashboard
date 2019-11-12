@@ -1,13 +1,41 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd'
 
 import { auth } from '../../utils/firebaseHelper'
 
+const LogoutBtn = styled.div`
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+  width: 90%;
+  margin-left: 5%;
+  padding: 2px;
+  border-radius: 1px;
+  position: absolute;
+  bottom: 15px;
+  background: rgba(255,255,255,.2);
+  transition: .2s ease-in-out;
+
+  :hover {
+    background: rgba(255,255,255,.4);
+    transition: .2s ease-in-out;
+    cursor: pointer;
+  }
+`
+
 const { Sider } = Layout
 const { SubMenu } = Menu
 
+interface IProps {
+  userName: string  // display name for top of page
+}
+
 // TODO: make sidebar wider, responsive for tablets, better button clicker
-const MySider = () => {
+const MySider: React.FC<IProps> = ({
+  userName
+}) => {
   const [collapsed, setCollapsed] = useState(false)
 
   const onCollapsed = () => {
@@ -32,8 +60,9 @@ const MySider = () => {
       }}
     >
       <div className="logo" >
-        <h3 style={logoStyle}>
-          <span style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.4)" }}>J Dawson</span></h3>
+        <Link to='/home' style={logoStyle}>
+          <span style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.4)" }}>
+            {userName}</span></Link>
       </div>
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
         <SubMenu
@@ -64,13 +93,9 @@ const MySider = () => {
           <span className="nav-text">Favorites</span>
         </Menu.Item>
       </Menu>
-      <div style={{color:'white', fontSize:'1.5rem', textAlign:'center',
-        width: '90%', marginLeft: '5%', padding:'2px',
-        position:'absolute', bottom:'15px', cursor:'pointer',
-        background:'rgba(255,255,255,.2)', }}
-        onClick={(e) => handleLogout(e)}>
+      <LogoutBtn onClick={(e) => handleLogout(e)}>
         Logout
-      </div>
+      </LogoutBtn>
     </Sider>
   )
 }

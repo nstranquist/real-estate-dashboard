@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Input from "../../shared-components/input";
-import Button from "../../shared-components/button";
+import Input from "../_shared/input";
+import Button from "../_shared/button";
 import SignInStyleWrapper from "../../styles/signin.style";
 import Spin from "../../styles/spin.style";
 

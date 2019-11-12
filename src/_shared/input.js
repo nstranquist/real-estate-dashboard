@@ -4,8 +4,8 @@ import {
   InputGroupWrapper,
   InputSearchWrapper,
   TextAreaWrapper,
-} from '../styles/input.style';
-import WithDirection from '../settings/withDirection';
+} from '../../styles/input.style';
+import WithDirection from '../../settings/withDirection';
 
 const { Search, TextArea, Group } = Input;
 

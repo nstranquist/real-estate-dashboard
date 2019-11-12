@@ -58,7 +58,7 @@ const App: React.FC<IProps> = ({
       <Switch>
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/login' component={Login} />
-        <PrivateRoute exact={true} path='/home' component={BaseLayout} />
+        <PrivateRoute exact={true} path='/home' component={BaseLayout}/>
         <Route path='/' render={() => <Redirect to='/login' />} />
       </Switch>
     </Router>
@@ -66,7 +66,7 @@ const App: React.FC<IProps> = ({
 }
 
 const mapStateToProps = (state: RootState) => ({
-  isAuth: state.profile.auth.isAuthenticated
+  isAuth: state.profile.auth.isAuthenticated,
 })
 
 export default connect(
