@@ -1,15 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Switch } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Layout } from 'antd'
 
 import MyHeader from './MyHeader'
 import MySider from './MySider'
 import PrivateRoute from '../../utils/PrivateRoute'
 
+import Home from '../Home'
 import Brokers from '../Brokers'
 import Investors from '../Investors'
 import Properties from '../Properties'
+import Matches from '../Matches'
+import Favorites from '../Favorites'
+import Profile from '../Profile/Profile'
 import { RootState } from '../../store/root'
 
 const { Content, Footer } = Layout
@@ -31,9 +35,14 @@ const BaseLayout: React.FC<IProps> = ({
         {/* Content View (TODO: replace with router view) */}
         <Content style={{ margin: '24px 16px 0' }}>
           <Switch>
-            <PrivateRoute exact={true} path='/brokers' component={Brokers} />
-            <PrivateRoute exact={true} path='/investors' component={Investors} />
-            <PrivateRoute exact={true} path='/properties' component={Properties} />
+            <PrivateRoute exact path='/home/brokers' component={Brokers} />
+            <PrivateRoute exact path='/home/investors' component={Investors} />
+            <PrivateRoute exact path='/home/properties' component={Properties} />
+            <PrivateRoute exact path='/home/matches' component={Matches} />
+            <PrivateRoute exact path='/home/favorites' component={Favorites} />
+            <PrivateRoute exact path='/home/profile' component={Profile} />
+            <PrivateRoute exact path='/home' component={Home} />
+            <Route path='/' render={() => <Redirect to='/home' />} />
           </Switch>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Jacob's Brokerage Dashboard, 2019</Footer>

@@ -64,34 +64,46 @@ const MySider: React.FC<IProps> = ({
         <Link to='/home' style={logoStyle}>
           <span style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.4)" }}>
             {userName}</span></Link>
+        <Link to='/home/profile'>View Profile</Link>
       </div>
+      <br />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
         <SubMenu
           key="subj1"
           title={
-            <span>
+            <Link to='/home' style={{color:'#E2F1FF'}}>
               <Icon type="copy" />
               <span>Lists</span>
-            </span>
+            </Link>
           }
         >
           <Menu.Item key="1">
-            <span className="nav-text">Brokers</span>
+            <Link to='/home/brokers'>
+              <span className="nav-text">Brokers</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <span className="nav-text">Investors</span>
+            <Link to='/home/investors'>
+              <span className="nav-text">Investors</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key="3">
-            <span className="nav-text">Properties</span>
+            <Link to='/home/properties'>
+              <span className="nav-text">Properties</span>
+            </Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="4">
-          <Icon type="check" />
-          <span className="nav-text">Matches</span>
+          <Link to='/home/matches'>
+            <Icon type="check" />
+            <span className="nav-text">Matches</span>
+          </Link>
         </Menu.Item>
         <Menu.Item key="5">
-          <Icon type="star" />
-          <span className="nav-text">Favorites</span>
+          <Link to='/home/favorites'>
+            <Icon type="star" />
+            <span className="nav-text">Favorites</span>
+          </Link>
         </Menu.Item>
       </Menu>
       <LogoutBtn onClick={(e) => handleLogout(e)}>
