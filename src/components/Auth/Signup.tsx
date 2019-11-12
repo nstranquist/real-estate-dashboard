@@ -111,6 +111,8 @@ const SignUp: React.FC<IProps> = ({
               <div className="isoSignUpForm">
                 <div className="isoInputWrapper">
                   <Input
+                    autoFocus
+                    required
                     size="large"
                     placeholder="First name"
                     value={firstName}
@@ -119,6 +121,7 @@ const SignUp: React.FC<IProps> = ({
 
                 <div className="isoInputWrapper">
                   <Input 
+                    required
                     size="large"
                     placeholder="Last name"
                     value={lastName}
@@ -127,6 +130,7 @@ const SignUp: React.FC<IProps> = ({
 
                 <div className="isoInputWrapper">
                   <Input
+                    required
                     size="large"
                     placeholder="Email"
                     value={email}
@@ -137,6 +141,7 @@ const SignUp: React.FC<IProps> = ({
 
                 <div className="isoInputWrapper">
                   <Input
+                    required
                     size="large"
                     type="password"
                     placeholder="Password"
@@ -147,6 +152,7 @@ const SignUp: React.FC<IProps> = ({
                 </div>
                 <div className="isoInputWrapper">
                   <Input
+                    required
                     size="large"
                     type="password"
                     placeholder="Confirm Password"

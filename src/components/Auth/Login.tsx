@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
+import styled from 'styled-components'
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Input from "../_shared/input";
-import Button from "../_shared/button";
+import { Form, Input, Button, Icon } from 'antd'
+
+//import Input from "../_shared/input";
+//import Button from "../_shared/button";
 import SignInStyleWrapper from "../../styles/signin.style";
 import Spin from "../../styles/spin.style";
 
 import { attemptLogin, clearAuthErrors } from '../../store/profileContainer/auth/actions'
 import { RootState } from "../../store/root";
+
 
 interface IProps {
   isAuth: boolean
@@ -78,19 +82,22 @@ const SignIn: React.FC<IProps> = ({
                 <p>{loginError.message}</p>
               </div>)}
             <Spin spinning={loadingAuth} size="large">
-              <div className="isoSignInForm">
-                <div className="isoInputWrapper">
+              <Form className="isoSignInForm">
+                <Form.Item className="isoInputWrapper">
                   <Input
+                    autoFocus
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.45)' }} />}
                     size="large"
+                    type="email"
                     placeholder="Email"
                     value={email}
                     onChange={onEmailChange}
-                    autoFocus
                   />
-                </div>
+                </Form.Item>
 
-                <div className="isoInputWrapper">
+                <Form.Item className="isoInputWrapper">
                   <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.45)' }} />}
                     size="large"
                     type="password"
                     placeholder="Password"
@@ -98,16 +105,16 @@ const SignIn: React.FC<IProps> = ({
                     onChange={onPassChange}
                     onKeyPress={onKeyPress}
                   />
-                </div>
+                </Form.Item>
 
-                <div className="isoInputWrapper isoLeftRightComponent">
+                <Form.Item className="isoInputWrapper isoLeftRightComponent">
                   <Button type="primary" onClick={(e: any) => handleLogin(e)}>
                     Sign In
                     {/* <IntlMessages id="page.signInButton" /> */}
                   </Button>
-                </div>
+                </Form.Item>
 
-                <div className="isoCenterComponent isoHelperWrapper">
+                <Form.Item className="isoCenterComponent isoHelperWrapper">
                   {/* <Link to="/forgotpassword" className="isoForgotPass">
                     <IntlMessages id="page.signInForgotPass" />
                   </Link> */}
@@ -115,8 +122,8 @@ const SignIn: React.FC<IProps> = ({
                     No Account? Create an Account
                     {/* <IntlMessages id="page.signInCreateAccount" /> */}
                   </Link>
-                </div>
-              </div>
+                </Form.Item>
+              </Form>
             </Spin>
           </div>
         </div>
