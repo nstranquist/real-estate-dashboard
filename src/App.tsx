@@ -6,13 +6,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import BaseLayout from './components/core'
 import Signup from './components/Auth/Signup'
 import Login from './components/Auth/Login'
-import Brokers from './components/Brokers'
-import Investors from './components/Investors'
-import Properties from './components/Properties'
-import Matches from './components/Matches'
-import Favorites from './components/Favorites'
-import Profile from './components/Profile/Profile'
-import PrivateRoute from './utils/PrivateRoute'
 
 import { getUserData, getUserPrivateData } from './store/profileContainer/userData/actions'
 import { authenticateUser, logout } from './store/profileContainer/auth/actions'

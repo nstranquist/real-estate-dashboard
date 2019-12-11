@@ -20,10 +20,12 @@ const { Content, Footer } = Layout
 
 interface IProps {
   userName: string
+  screenName: string
 }
 
 const BaseLayout: React.FC<IProps> = ({
-  userName
+  userName,
+  screenName,
 }) => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -31,7 +33,7 @@ const BaseLayout: React.FC<IProps> = ({
       <MySider userName={userName} />
       <Layout>
         {/* Page Header */}
-        <MyHeader />
+        <MyHeader screenName={screenName} />
         {/* Content View (TODO: replace with router view) */}
         <Content style={{ margin: '24px 16px 0' }}>
           <Switch>
@@ -52,7 +54,8 @@ const BaseLayout: React.FC<IProps> = ({
 }
 
 const mapStateToProps = (state: RootState) => ({
-  userName: (state.profile.userData.firstName.charAt(0) + ' ' + state.profile.userData.lastName)
+  userName: (state.profile.userData.firstName.charAt(0) + ' ' + state.profile.userData.lastName),
+  screenName: state.ui.screenName,
 })
 
 export default connect(

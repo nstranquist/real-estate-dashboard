@@ -4,11 +4,13 @@ import { combineReducers } from 'redux'
 // reducers
 import profileReducer from './profileContainer'
 import properties from './properties/reducers'
+import ui from './ui'
 
 // ROOT REDUCER
 const rootApp = combineReducers({
   profile: profileReducer,  // combines auth, userData, and ...
-  properties
+  properties,
+  ui
 })
 
 export default rootApp

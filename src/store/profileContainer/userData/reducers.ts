@@ -49,6 +49,7 @@ export default (
           ...state,
           firstName: action.firstName,
           lastName: action.lastName,
+          email: action.email,
           company: action.company,
           loadingUserStaticData: false,
           errors: null,

@@ -71,10 +71,12 @@ const MySider: React.FC<IProps> = ({
         <SubMenu
           key="subj1"
           title={
-            <Link to='/home' style={{color:'#E2F1FF'}}>
+            // <Link to='/home' style={{color:'#E2F1FF'}}>
+            <span>
               <Icon type="copy" />
               <span>Lists</span>
-            </Link>
+            </span>
+            // </Link>
           }
         >
           <Menu.Item key="1">
