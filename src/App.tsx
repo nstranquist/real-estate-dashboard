@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // import components
-import BaseLayout from './components/core'
+import BaseLayout from './components/layout'
 import Signup from './components/Auth/Signup'
 import Login from './components/Auth/Login'
 

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+// import components
+import { Form } from "antd";
 import Input from "../_shared/input";
 import Button from "../_shared/button";
-
+// import styled components
 import SignUpStyleWrapper from "../../styles/signup.style";
 import Spin from "../../styles/spin.style";
-
+// import redux
 import { attemptSignup, clearAuthErrors } from '../../store/profileContainer/auth/actions'
 import { RootState } from "../../store/root";
+// import types
+import { SignUpForm } from '../../types'
 
 
 interface IProps {
@@ -19,6 +23,14 @@ interface IProps {
   clearAuthErrors(): void
 }
 
+const emptyForm: SignUpForm = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confPassword: ''
+}
+
 const SignUp: React.FC<IProps> = ({
   isAuth,
   loadingAuth,
@@ -27,163 +39,143 @@ const SignUp: React.FC<IProps> = ({
   clearAuthErrors,
 }) => {
   //const [redirectToReferrer, setRedirectToReferrer] = useState(false)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confPassword, setConfPassword] = useState('')
+  const [formData, setFormData] = useState<SignUpForm>(emptyForm)
+  const [formErrors, setFormErrors] = useState<string | null>(null)
 
   useEffect(() => {
-    console.log('called useEffect')
-    clearAuthErrors()
+    clearAuthErrors() // clears errors on mount
   }, [])
 
   const handleSignup = (e: any) => {
     e.preventDefault()
-    console.log('signing up')
+    // clear form errors
+    setFormErrors(null)
+
+    const { firstName, lastName, email, password, confPassword } = formData
+
     if(password === confPassword) {
       attemptSignup(firstName, lastName, email, password)
       clearForm()
     } else {
-      setPassword('')
-      setConfPassword('')
-      console.log('error! passwords do not match')
-      alert('passwords must match')
+      setFormData({
+        ...formData,
+        password: '',
+        confPassword: ''
+      })
+      setFormErrors('passwords must match')
     }
   };
-  const clearForm = () => { // is this needed? can test...
-    setFirstName('')
-    setLastName('')
-    setEmail('')
-    setPassword('')
-    setConfPassword('')
-    //setRedirectToReferrer(false)
+
+  const handleInput = (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
   }
+
   const onKeyPress = (e: any) => { 
     if (e.which === 13) // 13 is the 'enter' key
       handleSignup(e);
   };
 
-  //redirectToReferrer = this.state;
-  const onEmailChange = (event: any) => {
-    const value = event.target.value;
-    setEmail(value)
-  };
-  const onPassChange = (event: any) => {
-    const value = event.target.value;
-    setPassword(value)
-  };
-  const onConfPassChange = (event: any) => {
-    const value = event.target.value;
-    setConfPassword(value)
-  };
-  // TODO: optimize this, use 1 function for all text updates
-  //  will need to pass in some sort of prop to define / identify it
-  const onFirstNameChange = (event: any) => {
-    const value = event.target.value;
-    setFirstName(value)
-  };
-  const onLastNameChange = (event: any) => {
-    const value = event.target.value;
-    setLastName(value)
-  };
-    
-  //const from = { pathname: "/dashboard" };
-  if (isAuth) {
-    return <Redirect to={'/home'} />;
+  const clearForm = () => {
+    setFormData(emptyForm)
+    //setRedirectToReferrer(false)
   }
+  
+  if (isAuth)
+    return <Redirect to='/home' />
 
-    return (
-      <SignUpStyleWrapper className="isoSignUpPage">
-        <div className="isoSignUpContentWrapper">
-          <div className="isoSignUpContent">
-            <div className="isoLogoWrapper">
-              <Link to="/dashboard" style={{color:'black'}}>
-                Create an Account
-                {/* <IntlMessages id="EDURain Sign In" /> */}
-              </Link>
-            </div>
-            {signupError && (<div style={{color: 'red'}}>
-                <p>Error: Could not signup</p>
-                <p>{signupError.message}</p>
-              </div>)}
-            <Spin spinning={loadingAuth} size="large">
-              <div className="isoSignUpForm">
-                <div className="isoInputWrapper">
-                  <Input
-                    autoFocus
-                    required
-                    size="large"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={onFirstNameChange}/>
-                </div>
-
-                <div className="isoInputWrapper">
-                  <Input 
-                    required
-                    size="large"
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={onLastNameChange}/>
-                </div>
-
-                <div className="isoInputWrapper">
-                  <Input
-                    required
-                    size="large"
-                    placeholder="Email"
-                    value={email}
-                    onChange={onEmailChange}
-                    autoFocus
-                  />
-                </div>
-
-                <div className="isoInputWrapper">
-                  <Input
-                    required
-                    size="large"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={onPassChange}
-                    onKeyPress={onKeyPress}
-                  />
-                </div>
-                <div className="isoInputWrapper">
-                  <Input
-                    required
-                    size="large"
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={confPassword}
-                    onChange={onConfPassChange}
-                    onKeyPress={onKeyPress}
-                  />
-                </div>
-
-                <div className="isoInputWrapper isoLeftRightComponent">
-                  <Button type="primary" onClick={handleSignup}>
-                    Sign Up
-                    {/* <IntlMessages id="page.signUpButton" /> */}
-                  </Button>
-                </div>
-
-                <div className="isoCenterComponent isoHelperWrapper">
-                  {/* <Link to="/forgotpassword" className="isoForgotPass">
-                    <IntlMessages id="page.signUpForgotPass" />
-                  </Link> */}
-                  <Link to="/login">
-                    Already have an account? Log in
-                    {/* <IntlMessages id="page.signUpCreateAccount" /> */}
-                  </Link>
-                </div>
-              </div>
-            </Spin>
+  return (
+    <SignUpStyleWrapper className="isoSignUpPage">
+      <div className="isoSignUpContentWrapper">
+        <div className="isoSignUpContent">
+          <div className="isoLogoWrapper">
+            <Link to="/dashboard" style={{color:'black'}}>
+              Create an Account</Link>
           </div>
+          {/* show errors from backend and/or UI */}
+          {signupError && (<div style={{color: 'red'}}>
+              <p>Data Error: {signupError.message}</p>
+            </div>)}
+          {formErrors && <div style={{color:'red'}}>UI Error: {formErrors}</div>}
+          <Spin spinning={loadingAuth} size="large">
+            <Form className="isoSignUpForm">
+              <Form.Item className="isoInputWrapper">
+                <Input
+                  autoFocus
+                  required
+                  size="large"
+                  placeholder="First name"
+                  name='firstName'
+                  value={formData.firstName}
+                  onChange={handleInput}/>
+              </Form.Item>
+
+              <Form.Item className="isoInputWrapper">
+                <Input 
+                  required
+                  size="large"
+                  placeholder="Last name"
+                  name='lastName'
+                  value={formData.lastName}
+                  onChange={handleInput}/>
+              </Form.Item>
+
+              <Form.Item className="isoInputWrapper">
+                <Input
+                  required
+                  size="large"
+                  placeholder="Email"
+                  name='email'
+                  value={formData.email}
+                  onChange={handleInput}
+                  autoFocus
+                />
+              </Form.Item>
+
+              <Form.Item className="isoInputWrapper">
+                <Input
+                  required
+                  size="large"
+                  type="password"
+                  placeholder="Password"
+                  name='password'
+                  value={formData.password}
+                  onChange={handleInput}
+                  onKeyPress={onKeyPress}
+                />
+              </Form.Item>
+              <Form.Item className="isoInputWrapper">
+                <Input
+                  required
+                  size="large"
+                  type="password"
+                  placeholder="Confirm Password"
+                  name='confPassword'
+                  value={formData.confPassword}
+                  onChange={handleInput}
+                  onKeyPress={onKeyPress}
+                />
+              </Form.Item>
+
+              <Form.Item className="isoInputWrapper isoLeftRightComponent">
+                <Button type="primary" onClick={handleSignup}>
+                  Sign Up</Button>
+              </Form.Item>
+
+              <Form.Item className="isoCenterComponent isoHelperWrapper">
+                {/* <Link to="/forgotpassword" className="isoForgotPass">
+                  Rest Password</Link> */}
+                <Link to="/login">
+                  Already have an account? Log in</Link>
+              </Form.Item>
+            </Form>
+          </Spin>
         </div>
-      </SignUpStyleWrapper>
-    );
+      </div>
+    </SignUpStyleWrapper>
+  );
 }
 
 const mapStateToProps = (state: RootState) => ({
@@ -196,14 +188,3 @@ export default connect(
   mapStateToProps,
   { attemptSignup, clearAuthErrors }
 )(SignUp);
-
-
-// OLD CODE:
-  //componentWillReceiveProps(nextProps) {
-  //  if (
-  //    this.props.isAuth !== nextProps.isLoggedIn &&
-  //    nextProps.isLoggedIn === true
-  //  ) {
-  //    this.setState({ redirectToReferrer: true });
-  //  }
-  //}
