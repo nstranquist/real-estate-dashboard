@@ -11,7 +11,8 @@ export const getUserData = () => (dispatch: Dispatch) => {
   // TODO: dispose of snapshot listener when necessary
   return firestore
     .doc(`profiles/${auth.currentUser!.uid}`)
-    .onSnapshot(doc => {
+    .get()
+    .then((doc) => {
       console.log('snapshot of userdata:', doc)
       console.log('doc data:', doc.data())
       dispatch({
@@ -21,7 +22,8 @@ export const getUserData = () => (dispatch: Dispatch) => {
         matchedProperties: doc.data()!.matchedProperties,
         matchedInvestors: doc.data()!.matchedInvestors,
       })
-    }, (err) => {
+    })
+    .catch((err) => {
       console.log('error: ', err)
       dispatch({ type: 'SET_USER_DATA_ERROR', err })
     })

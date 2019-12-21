@@ -66,7 +66,12 @@ const MySider: React.FC<IProps> = ({
         <Link to='/home/profile'>View Profile</Link>
       </div>
       <br />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={['4']}
+        defaultOpenKeys={["subj1"]} // keeps 'lists' open by default
+      >
         <SubMenu
           key="subj1"
           title={
@@ -79,8 +84,8 @@ const MySider: React.FC<IProps> = ({
           }
         >
           <Menu.Item key="1">
-            <Link to='/home/brokers'>
-              <span className="nav-text">Brokers</span>
+            <Link to='/home/properties'>
+              <span className="nav-text">Properties</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="2">
@@ -89,8 +94,8 @@ const MySider: React.FC<IProps> = ({
             </Link>
           </Menu.Item>
           <Menu.Item key="3">
-            <Link to='/home/properties'>
-              <span className="nav-text">Properties</span>
+            <Link to='/home/brokers'>
+              <span className="nav-text">Brokers</span>
             </Link>
           </Menu.Item>
         </SubMenu>

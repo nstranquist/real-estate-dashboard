@@ -102,7 +102,7 @@ const Profile: React.FC<IProps> = ({
       {/* TODO: make reusable styled-component 'ButtonWrapper' */}
       <div style={{display:'block', textAlign:'center'}}>
         <Button type='primary' onClick={handleSubmit}>
-          Update Profile</Button>
+          Update</Button>
       </div>
     </Card>
   )
