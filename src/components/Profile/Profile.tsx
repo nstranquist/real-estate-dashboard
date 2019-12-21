@@ -1,27 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
-import { Typography, List, Button } from 'antd'
+import { Card, Form, Input, Select, Typography, Button, } from 'antd'
 import { RootState } from '../../store/root'
-import { UserDataState } from '../../store/profileContainer/userData/types'
+import { attemptUpdateProfile } from '../../store/profileContainer/userData/actions'
+import { ProfileData } from '../../types'
 
-const { Title, Text, Paragraph } = Typography
-
-
-const ProfileStyleWrapper = styled.div`
-  background: white;
-  padding: 10px;
-  font-size: 1.2rem;
-`
-const ProfileItemStyle = styled.div`
-  display: block;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  color: rgba(0,0,0,.8);
-`
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 6 },
+    md: { span: 5, push:2 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 14 },
+    md: { span: 11, push:2 },
+  },
+}
 
 interface IProps {
-  profile: UserDataState
+  profile: ProfileData
+  profileError: any
+  attemptUpdateProfile(profileData: ProfileData): void
 }
 
 // can view, edit profile
@@ -30,76 +30,90 @@ const Profile: React.FC<IProps> = ({
     firstName,
     lastName,
     email,
-    company
-  }
+    companyName,
+    phone,
+    role
+  },
+  profileError,
+  attemptUpdateProfile
 }) => {
+  const [formData, setFormData] = useState<ProfileData>({
+    firstName, lastName, email, companyName, phone, role
+  })
+  const [formErrors, setFormErrors] = useState<string | null>(null)
 
-  const handleClickItem = (index: number) => {
-    console.log('clicked item', index)
+
+  const handleChange = (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+  const handleCustomChange = (name: string, value: string) => {
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
+
+  const handleSubmit = () => {
+    console.log('submit data:', formData)
+    setFormErrors(null)
+
+    // can add error checking if desired
+    attemptUpdateProfile(formData)
   }
 
   return (
-    <div>
-      <Title level={2}>
-        Profile
-        <Button style={{marginLeft:'10px'}} type="primary">Edit</Button>
-      </Title>
-      <List
-        header={<div>(click to edit)</div>}
-        bordered
-        style={{background:'white'}}
-      >
-        <List.Item onClick={() => handleClickItem(1)}>
-          <Typography.Text style={{fontSize:'.9rem'}}>First Name: </Typography.Text>
-          <ProfileItemStyle>
-            <Text editable>{firstName}</Text>
-          </ProfileItemStyle>
-        </List.Item>
-        <List.Item>
-          <Typography.Text style={{fontSize:'.9rem'}}>Last Name: </Typography.Text>
-          <ProfileItemStyle>
-            <Text editable>{lastName}</Text>
-          </ProfileItemStyle>
-        </List.Item>
-        <List.Item>
-          <Typography.Text style={{fontSize:'.9rem'}}>Email: </Typography.Text>
-          <ProfileItemStyle>
-            <Text editable>{email}</Text>
-          </ProfileItemStyle>
-        </List.Item>
-        <List.Item>
-          <Typography.Text style={{fontSize:'.9rem'}}>Company: </Typography.Text>
-          <ProfileItemStyle>
-            <Text editable>{company}</Text>
-          </ProfileItemStyle>
-        </List.Item>
-      </List>
-      {/* <ProfileStyleWrapper> */}
-        
-      {/* </ProfileStyleWrapper> */}
+    <Card>
+      <Typography.Title level={2} style={{textAlign:'center'}}>
+        Your Profile</Typography.Title>
+      <Form {...formItemLayout} style={{background:'white'}}>
+        {/* TODO: make 'formErrors' component to reuse */}
+        {formErrors && <div style={{color:'red'}}>{formErrors}</div>}
+        {profileError && <div style={{color:'red'}}>{profileError.message}</div>}
+        <Form.Item label='Email:'>
+          <Input required name='email' value={formData.email + " (cannot change)"} />
+        </Form.Item>
+        <Form.Item label='First Name:'>
+          <Input required name='firstName' value={formData.firstName} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label='Last Name:'>
+          <Input required name='lastName' value={formData.lastName} onChange={handleChange} />
+        </Form.Item>
+        {/* TODO: use cloud function to update 'Auth' email with this one */}
+        <Form.Item label='Company Name:'>
+          <Input required name='companyName' value={formData.companyName} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label='Phone:'>
+          <Input required name='phone' type="tel" pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+            value={formData.phone} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label='Role:'>
+          <Select defaultValue={formData.role} onChange={(value: string) => handleCustomChange('role', value)}>
+            <Select.Option value='Broker'>Broker</Select.Option>
+            <Select.Option value='Principal'>Principal</Select.Option>
+          </Select>
+        </Form.Item>
+        {/* TODO: allow to change password */}
+
+      </Form>
       
-    </div>
+      {/* TODO: make reusable styled-component 'ButtonWrapper' */}
+      <div style={{display:'block', textAlign:'center'}}>
+        <Button type='primary' onClick={handleSubmit}>
+          Update Profile</Button>
+      </div>
+    </Card>
   )
 }
 
 const mapStateToProps = (state: RootState) => ({
-  profile: state.profile.userData
+  profile: state.profile.userData, // TODO: add 'profile' object to 'userData' section of store, and add selector
+  profileError: state.profile.userData.errors
 })
 
 export default connect(
   mapStateToProps,
-  {  },
+  { attemptUpdateProfile }
 )(Profile)
-
-
-// OLD CODE:
-/* <Row>
-<Col sm={24} md={4} style={{paddingRight:'3%'}}>
-  <p>First Name:</p>
-  <p>Last Name:</p>
-</Col>
-<Col sm={24} md={6}>
-  <p>{firstName}</p>
-  <p>{lastName}</p>
-</Col>
-</Row> */

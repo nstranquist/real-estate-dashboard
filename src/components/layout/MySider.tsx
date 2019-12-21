@@ -36,7 +36,6 @@ interface IProps {
 const MySider: React.FC<IProps> = ({
   userName
 }) => {
-  console.log('userName value:', userName)
   const [collapsed, setCollapsed] = useState(false)
 
   const onCollapsed = () => {

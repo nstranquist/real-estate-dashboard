@@ -1,6 +1,6 @@
 import { auth, firestore } from '../../../utils/firebaseHelper'
 import { Dispatch } from 'redux'
-import { CreateProfileForm, ISignUpForm } from '../../../types'
+import { CreateProfileForm, ISignUpForm, ProfileData } from '../../../types'
 
 // auth/user actions
 export const attemptLogin = (email: string, password: string) => (dispatch: Dispatch, getState: any) => {
@@ -45,7 +45,7 @@ export const attemptSignup = (userSignUp: ISignUpForm) => (dispatch: Dispatch, g
     .createUserWithEmailAndPassword(email, password)
     .then((userCreds) => {
       console.log('signup successful with data: ', userCreds)
-      // dispatch({ type: 'AUTHENTICATE' })
+      // dispatch({ type: 'AUTHENTICATE' }) // uncomment if you want to directly go to dashboard
 
       // set token?
       // create /profiles in collection
@@ -72,10 +72,7 @@ export const attemptSignup = (userSignUp: ISignUpForm) => (dispatch: Dispatch, g
 //   // update account with second round of survey data
   
 // }
-export const attemptUpdateAccount = (profileData: CreateProfileForm) => (dispatch: Dispatch) => {
-  // update account with second round of survey data
 
-}
 
 export const clearAuthErrors = () => (dispatch: Dispatch) => {
   dispatch({ type: 'CLEAR_AUTH_ERRORS' })

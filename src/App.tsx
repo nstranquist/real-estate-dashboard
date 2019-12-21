@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // import components
-import BaseLayout from './components/layout'
+import { BaseLayout } from './components/layout'
 import Signup from './components/Auth/Signup'
 import Login from './components/Auth/Login'
 
-import { getUserData, getUserPrivateData } from './store/profileContainer/userData/actions'
+import { getUserData, getUserProfileData } from './store/profileContainer/userData/actions'
 import { authenticateUser, logout } from './store/profileContainer/auth/actions'
 import { auth } from './utils/firebaseHelper'
 import { RootState } from './store/root';
@@ -17,7 +17,7 @@ import { ResetPassword } from './components/Auth/ResetPassword';
 interface IProps {
   isAuth: boolean
   getUserData(): void
-  getUserPrivateData(): void
+  getUserProfileData(): void
   authenticateUser(): void
   logout(): void
 }
@@ -25,7 +25,7 @@ interface IProps {
 const App: React.FC<IProps> = ({
   isAuth,
   getUserData,
-  getUserPrivateData,
+  getUserProfileData,
   authenticateUser,
   logout
 }) => {
@@ -36,13 +36,13 @@ const App: React.FC<IProps> = ({
       if(isAuth) {
         console.log('user is authenticated')
         getUserData()
-        getUserPrivateData()
+        getUserProfileData()
       }
       else {
         console.log('not authenticated. wut')
         authenticateUser()
         getUserData()
-        getUserPrivateData()
+        getUserProfileData()
       }
       console.log('state changed. user:', user)
     } else {
@@ -81,7 +81,7 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(
   mapStateToProps,
-  { getUserData, getUserPrivateData, authenticateUser, logout }
+  { getUserData, getUserProfileData, authenticateUser, logout }
 )(App)
 
 // const contentStyle = {

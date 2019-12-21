@@ -37,3 +37,12 @@ export interface CreateProfileForm {
 
 // NOTE: 'ProfileForm' should combine SignUpForm and CreateProfileForm
 export type ProfileForm = ISignUpForm & CreateProfileForm
+
+export interface ProfileData {
+  firstName: string
+  lastName: string
+  email: string
+  companyName: string
+  phone: string
+  role: 'Broker' | 'Principal'
+}

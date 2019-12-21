@@ -1,8 +1,8 @@
-import { createStore, compose, applyMiddleware, Action } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import throttle from 'lodash/throttle'
+// import throttle from 'lodash/throttle'
 import rootApp from './store/root'
-import { loadState, saveState } from './utils/localStorage'
+// import { loadState, saveState } from './utils/localStorage'
 
 declare global {
   interface Window {
@@ -10,17 +10,17 @@ declare global {
   }
 }
 
-const logStoreChange = (store: any) => {
-  const rawDispatch = store.dispatch
-  return (action: Action) => {
-    //console.log('TYPE: ', action.type)
-    console.log('prev state: ', store.getState())
-    console.log('prev action:', action)
-    const returnValue = rawDispatch(action)
-    console.log('next state', store.getState())
-    return returnValue
-  }
-}
+// const logStoreChange = (store: any) => {
+//   const rawDispatch = store.dispatch
+//   return (action: Action) => {
+//     //console.log('TYPE: ', action.type)
+//     console.log('prev state: ', store.getState())
+//     console.log('prev action:', action)
+//     const returnValue = rawDispatch(action)
+//     console.log('next state', store.getState())
+//     return returnValue
+//   }
+// }
 
 const configureStore = () => {
   //const persistedState = loadState()
@@ -37,7 +37,7 @@ const configureStore = () => {
     ),
   )
 
-  store.dispatch = logStoreChange(store)
+  // store.dispatch = logStoreChange(store)
 
   // put items here that will be saved to localStorage
   //store.subscribe(throttle(() => {

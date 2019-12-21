@@ -2,16 +2,21 @@
 import { UserDataState, UserDataTypes } from './types'
 
 const initialUserDataState: UserDataState = {
-  email: '',
+  // Profile Data:
   firstName: '',
   lastName: '',
-  company: '',
+  email: '',
+  companyName: '',
+  phone: '',
+  role: 'Broker',
+  // Data
   myProperties: [],
   myInvestors: [],
   matchedProperties: [],
   matchedInvestors: [],
+  // loading and error flags
   loadingUserData: false,
-  loadingUserStaticData: false,
+  loadingUserProfileData: false,
   errors: null,
 }
 
@@ -26,10 +31,10 @@ export default (
         loadingUserData: true,
         errors: null
       }
-    case 'LOADING_USER_STATIC_DATA':
+    case 'LOADING_USER_PROFILE_DATA':
       return {
         ...state,
-        loadingUserStaticData: true,
+        loadingUserProfileData: true,
         errors: null
       }
     // this is the real-time data
@@ -43,15 +48,17 @@ export default (
         loadingUserData: false
       }
       // this is static data
-      case 'SET_USER_PRIVATE_DATA':
+      case 'SET_USER_PROFILE_DATA':
         console.log('setting user static data')
         return {
           ...state,
           firstName: action.firstName,
           lastName: action.lastName,
           email: action.email,
-          company: action.company,
-          loadingUserStaticData: false,
+          companyName: action.companyName,
+          phone: action.phone,
+          role: action.role,
+          loadingUserProfileData: false,
           errors: null,
         }
     case 'TOGGLE_FAVORITE_PROPERTY':

@@ -101,6 +101,7 @@ export const SignUpForm: React.FC<IProps> = ({
           required
           size="default"
           placeholder="Email"
+          type="email"
           name='email'
           value={formData.email}
           onChange={handleInput}

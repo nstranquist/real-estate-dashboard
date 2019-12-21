@@ -1,15 +1,21 @@
 
 export interface UserDataState {
-  firstName: string,
-  lastName: string,
-  email: string,
-  company?: string,
+  // Profile Data
+  firstName: string
+  lastName: string
+  email: string
+  companyName: string
+  phone: string
+  role: 'Broker' | 'Principal'
+  // loading flags
   loadingUserData: boolean
-  loadingUserStaticData: boolean
+  loadingUserProfileData: boolean
+  // Data
   myProperties: number[] | null
   myInvestors: number[] | null
   matchedProperties: number[] | null
   matchedInvestors: string[] | null
+  // errors
   errors: any[] | null
 }
 
@@ -22,14 +28,15 @@ export interface SetUserData {
   matchedInvestors: number[] | null
 }
 // static data
-export interface SetUserPrivateData {
-  readonly type: 'SET_USER_PRIVATE_DATA'
+export interface SetUserProfileData {
+  readonly type: 'SET_USER_PROFILE_DATA'
   firstName: string
   lastName: string
   email: string
-  company?: string
-  // profile url
-  // other stats
+  companyName: string
+  phone: string
+  role: 'Broker' | 'Principal'
+  // profile url, other stats
 }
 export interface ToggleFavoriteProperty {
   readonly type: 'TOGGLE_FAVORITE_PROPERTY'
@@ -46,9 +53,9 @@ export interface SetUserDataError {
 
 export type UserDataTypes = 
 | {readonly type: 'LOADING_USER_DATA'}
-| {readonly type: 'LOADING_USER_STATIC_DATA'}
+| {readonly type: 'LOADING_USER_PROFILE_DATA'}
 | SetUserData
-| SetUserPrivateData
+| SetUserProfileData
 | ToggleFavoriteProperty
 | ToggleFavoriteInvestor
 | SetUserDataError
