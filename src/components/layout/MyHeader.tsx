@@ -6,12 +6,10 @@ const { TabPane } = Tabs;
 
 interface IProps {
   screenName?: string
-  subtitle?: string
 }
 
 const MyHeader: React.FC<IProps> = ({
   screenName='Title',
-  subtitle='placeholder subtitle',
 }) => {
   
   // const routes = [
@@ -34,32 +32,30 @@ const MyHeader: React.FC<IProps> = ({
   // ]
   
   return (
-    <div>
-      <PageHeader
-        style={{
-          border: '1px solid rgb(235, 237, 240)',
-          background: 'white'
-        }}
-        onBack={() => window.history.back()}
-        title={screenName}
-        subTitle={subtitle}
-        // breadcrumb={{ routes }}
-        extra={[
-          <Button key="3">Operation</Button>,
-          <Button key="2">Operation</Button>,
-          <Button key="1" type="primary">
-            Primary
-          </Button>,
-        ]}
-        footer={
-          <Tabs defaultActiveKey="1">
-            <TabPane tab="Details" key="1" />
-            <TabPane tab="Rule" key="2" />
-          </Tabs>
-        }
-      >
-      </PageHeader>
-    </div>
+    <PageHeader
+      style={{
+        border: '1px solid rgb(235, 237, 240)',
+        background: 'white'
+      }}
+      onBack={() => window.history.back()}
+      title={screenName}
+      // subTitle={subtitle}
+      // breadcrumb={{ routes }}
+      extra={[
+        <Button key="3">Operation</Button>,
+        <Button key="2">Operation</Button>,
+        <Button key="1" type="primary">
+          Primary
+        </Button>,
+      ]}
+      footer={
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Details" key="1" />
+          <TabPane tab="Rule" key="2" />
+        </Tabs>
+      }
+    >
+    </PageHeader>
   )
 }
 

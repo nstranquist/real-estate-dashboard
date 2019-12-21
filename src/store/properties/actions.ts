@@ -71,6 +71,10 @@ export const deleteProperty = (id: string) => (dispatch: Dispatch) => {
     .catch(err => dispatch({ type: 'SET_PROPERTY_ERROR', err}))
 }
 
+export const uploadProperties = (data: any) => (dispatch: Dispatch) => {
+  console.log('upload properties with data:', data)
+}
+
 export const setPropertiesFilter = (filter: string) => ({
   type: 'SET_PROPERTIES_FILTER',
   filter

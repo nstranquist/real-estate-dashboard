@@ -1,9 +1,333 @@
 import React from 'react'
+import { Row, Col, Typography, Card } from 'antd'
 
 const Favorites = () => {
   return (
     <div>
-      Favorites
+      <Typography.Title level={3} style={{textAlign:'center'}}>
+        Favorites</Typography.Title>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
+      <Row gutter={[16,16]}>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card style={{textAlign:'center'}}>
+            <Typography.Title level={4}>
+              Details</Typography.Title>
+            <ul style={{listStyle:'none', paddingLeft:0}}>
+              <li>fav 1</li>
+              <li>fav 2</li>
+              <li>fav 3</li>
+            </ul>
+          </Card>
+        </Col>
+      </Row>
     </div>
   )
 }

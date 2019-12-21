@@ -17,7 +17,6 @@ import Profile from '../Profile/Profile'
 
 import { RootState } from '../../store/root'
 
-const { Content, Footer } = Layout
 
 interface IProps {
   userName: string
@@ -35,7 +34,8 @@ const MyBaseLayout: React.FC<IProps> = ({
       <Layout>
         {/* Page Header */}
         <MyHeader screenName={screenName} />
-        <Content style={{ margin: '24px 16px 0' }}>
+        {/* Page Content View */}
+        <Layout.Content style={{ margin: '24px 16px 0' }}>
           <Switch>
             <PrivateRoute exact path='/home/brokers' component={Brokers} />
             <PrivateRoute exact path='/home/investors' component={Investors} />
@@ -46,8 +46,10 @@ const MyBaseLayout: React.FC<IProps> = ({
             <PrivateRoute exact path='/home' component={Home} />
             <Route path='/home' render={() => <Redirect to='/home' />} />
           </Switch>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Jacob's Brokerage Dashboard, 2019</Footer>
+        </Layout.Content>
+        {/* Page Footer */}
+        <Layout.Footer style={{ textAlign: 'center' }}>
+          Jacob's Brokerage Dashboard, 2019</Layout.Footer>
       </Layout>
     </Layout>
   )
