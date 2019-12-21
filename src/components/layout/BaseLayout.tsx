@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import styled from 'styled-components'
 // import comopnents
 import { Layout } from 'antd'
 import MyHeader from './MyHeader'
@@ -23,6 +24,19 @@ interface IProps {
   screenName: string
 }
 
+const StyledLayout = styled(Layout)`
+  margin-left: 200px;
+  transition: .25s ease;
+
+  @media(max-width: 992px) {
+    margin-left: 0;
+    transition: .25s ease;
+  }
+  
+`
+// @media(min-width: 576px) {
+//   marginLeft: 200px;
+// }
 const MyBaseLayout: React.FC<IProps> = ({
   userName,
   screenName,
@@ -30,9 +44,10 @@ const MyBaseLayout: React.FC<IProps> = ({
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {/* Side Drawer */}
-      <MySider userName={userName} />
-      <Layout>
+      <MySider width={200} userName={userName} />
+      <StyledLayout>
         {/* Page Header */}
+        {/* TODO: either connect router to redux, or move this to inside the page component */}
         <MyHeader screenName={screenName} />
         {/* Page Content View */}
         <Layout.Content style={{ margin: '24px 16px 0' }}>
@@ -50,7 +65,7 @@ const MyBaseLayout: React.FC<IProps> = ({
         {/* Page Footer */}
         <Layout.Footer style={{ textAlign: 'center' }}>
           Jacob's Brokerage Dashboard, 2019</Layout.Footer>
-      </Layout>
+      </StyledLayout>
     </Layout>
   )
 }

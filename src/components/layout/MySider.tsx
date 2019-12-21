@@ -27,11 +27,13 @@ const { Sider } = Layout
 const { SubMenu } = Menu
 
 interface IProps {
+  width: number
   userName: string  // display name for top of page
 }
 
 // TODO: make sidebar wider, responsive for tablets, better button clicker
 const MySider: React.FC<IProps> = ({
+  width,
   userName
 }) => {
   const [collapsed, setCollapsed] = useState(false)
@@ -46,7 +48,8 @@ const MySider: React.FC<IProps> = ({
   }
 
   return (
-    <Sider style={{position:'relative'}}
+    <Sider style={{overflow: 'auto', height: '100vh', left: 0, position:'fixed'}}
+      width={width}
       breakpoint="lg"
       collapsedWidth="0"
       onBreakpoint={broken => {
