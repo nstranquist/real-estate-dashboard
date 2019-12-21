@@ -38,6 +38,35 @@ const StyledTabs = styled(Tabs)`
     margin-bottom: 0;
   }
 `
+const StyledFlatCard = styled(Card)`
+  padding: 8px;
+  margin: 0;
+  text-align: center;
+
+  .ant-card-body {
+    padding: 5px;
+    padding-top: 12px;
+
+    h4.ant-typography {
+      align-self: center;
+      margin: auto;
+      padding: 5px;
+
+      &.card-title {
+        margin-bottom:10px;
+        padding: 3px;
+      }
+    }
+
+    .styled-card-item {
+      align-self: center;
+      margin: auto;
+      padding: 5px;
+      width: 33%;
+      display: inline-block;
+    }
+  }
+`
 
 // TODO: clean up all of these prop imports (after testing is done)
 const Home: React.FC<IProps> = ({
@@ -98,7 +127,7 @@ const Home: React.FC<IProps> = ({
       {investorErrors && <div style={{color:'red'}}>Error: {investorErrors.message}</div>}
       {brokerErrors && <div style={{color:'red'}}>Error: {brokerErrors.message}</div>}
       <Row gutter={[16, 48]}>
-        <Col span={8}>
+        <Col xs={0} sm={8}>
           <Card
             title="Properties"
             extra={<Link to='/home/properties'>View All</Link>}
@@ -106,7 +135,7 @@ const Home: React.FC<IProps> = ({
             <Typography.Title style={{textAlign:'center'}}>{properties.length}</Typography.Title>
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={0} sm={8}>
           <Card
             title="Investors"
             extra={<Link to='/home/investors'>View All</Link>}
@@ -114,13 +143,30 @@ const Home: React.FC<IProps> = ({
             <Typography.Title style={{textAlign:'center'}}>{investors.length}</Typography.Title>
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={0} sm={8}>
           <Card
             title="Brokers"
             extra={<Link to='/home/brokers'>View All</Link>}
           >
             <Typography.Title style={{textAlign:'center'}}>{brokers.length}</Typography.Title>
           </Card>
+        </Col>
+        <Col xs={24} sm={0}>
+          <StyledFlatCard>
+            {/* <Typography.Title level={4} className='card-title'>Overview</Typography.Title> */}
+            <div className='styled-card-item'>
+              <Typography.Text>Properties</Typography.Text>
+              <Typography.Title level={4}>{properties.length}</Typography.Title>
+            </div>
+            <div className='styled-card-item'>
+              <Typography.Text>Investors</Typography.Text>
+              <Typography.Title level={4}>{investors.length}</Typography.Title>
+            </div>
+            <div className='styled-card-item'>
+              <Typography.Text>Brokers</Typography.Text>
+              <Typography.Title level={4}>{brokers.length}</Typography.Title>
+            </div>
+          </StyledFlatCard>
         </Col>
       </Row>
       {/* Row with Tabs for the 3 list types, each type containing Full-Width Table */}

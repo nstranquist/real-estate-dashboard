@@ -7,7 +7,7 @@ const Favorites = () => {
       <Typography.Title level={3} style={{textAlign:'center'}}>
         Favorites</Typography.Title>
       <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -18,7 +18,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -29,7 +29,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -40,7 +40,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -51,9 +51,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -64,7 +62,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -75,7 +73,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -86,7 +84,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -97,9 +95,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -110,7 +106,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -121,7 +117,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -132,7 +128,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -143,9 +139,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -156,7 +150,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -167,7 +161,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -178,7 +172,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -189,9 +183,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -202,7 +194,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -213,7 +205,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -224,7 +216,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -235,9 +227,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -248,7 +238,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -259,7 +249,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -270,7 +260,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -281,9 +271,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-      </Row>
-      <Row gutter={[16,16]}>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -294,7 +282,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -305,7 +293,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>
@@ -316,7 +304,7 @@ const Favorites = () => {
             </ul>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={8} md={6}>
           <Card style={{textAlign:'center'}}>
             <Typography.Title level={4}>
               Details</Typography.Title>

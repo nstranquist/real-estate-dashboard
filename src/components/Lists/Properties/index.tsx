@@ -95,6 +95,7 @@ class Properties extends React.Component<IProps, any> {
 
     return (
       <>
+        {/* Toolbar Row */}
         <Row type="flex" justify="center" gutter={[16,24]}>
           {/* Toolbar Row */}
           <Col>
@@ -117,6 +118,7 @@ class Properties extends React.Component<IProps, any> {
             </Upload>
           </Col>
         </Row>
+        {/* Properties Table View Row */}
         <Row gutter={[16,24]}>
           <Col span={24}>
             <PropertiesTable
