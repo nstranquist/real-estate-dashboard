@@ -60,6 +60,38 @@ export const attemptSignup = (userSignUp: ISignUpForm) => (dispatch: Dispatch, g
           phone,
           role
         })
+        .then(() => {
+          firestore
+            .collection(`/profiles/${userCreds.user!.uid}/properties`)
+            .add({
+              address:'1234 example dr.',
+              price: 400000,
+              capRate: 20,
+              noi: 30000,
+              propertyType: 'Retail',
+              yearBuilt: 2019
+            })
+          firestore
+            .collection(`/profiles/${userCreds.user!.uid}/investors`)
+            .add({
+              address:'1234 example dr.',
+              price: 400000,
+              capRate: 20,
+              noi: 30000,
+              propertyType: 'Retail',
+              yearBuilt: 2019
+            })
+          firestore
+            .collection(`/profiles/${userCreds.user!.uid}/brokers`)
+            .add({
+              address:'1234 example dr.',
+              price: 400000,
+              capRate: 20,
+              noi: 30000,
+              propertyType: 'Retail',
+              yearBuilt: 2019
+            })
+        })
         .catch(err => console.log(err))
     })
     .catch(err => {

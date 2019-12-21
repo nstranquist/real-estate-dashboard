@@ -1,5 +1,4 @@
 import { PropertiesState, PropertyActionTypes } from './types'
-import { Property } from '../../types'
 
 const initialState: PropertiesState = {
   properties: [],
@@ -26,33 +25,6 @@ export default (
         loading: false,
         errors: null
       }
-    case 'ADD_PROPERTY':
-      // NOTE: shallow copy errors possible here
-      let newProperties: Property[] = [...state.properties]
-      newProperties.push(action.property)
-      console.log('new properties after add:', newProperties)
-      return {
-        ...state,
-        properties: newProperties
-      }
-    case 'UPDATE_PROPERTY':
-      newProperties = [...state.properties]
-      let index = newProperties.findIndex(property => property.id === action.property.id)
-      newProperties[index] = action.property
-      console.log('new properties after edit:', newProperties)
-      return {
-        ...state,
-        properties: newProperties
-      }
-    case 'DELETE_PROPERTY':
-      newProperties = [...state.properties]
-      let propertyIndex = newProperties.findIndex(property => property.id === action.id)
-      newProperties.splice(propertyIndex, 1)
-      console.log('new properties after delete:', newProperties)
-      return {
-        ...state,
-        properties: newProperties
-      }
     case 'SET_PROPERTIES_FILTER':
       return {
         ...state,
@@ -64,7 +36,7 @@ export default (
     // case 'TOGGLE_FAVORITE_PROPERTY':
     //   // find property in array by id that needs to be toggled
     //   const newProperties = state.properties.map(property => {
-    //     if(property.id === action.id)
+    //     if(property.index === action.index)
     //       property.isFavorite = !property.isFavorite  //toggles property
     //     return property
     //   })

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Layout, Menu, Icon } from 'antd'
+import { Layout, Menu, Icon, Button } from 'antd'
 
 import { auth } from '../../utils/firebaseHelper'
 
@@ -15,11 +15,9 @@ const LogoutBtn = styled.div`
   border-radius: 1px;
   position: absolute;
   bottom: 15px;
-  background: rgba(255,255,255,.2);
   transition: .2s ease-in-out;
 
   :hover {
-    background: rgba(255,255,255,.4);
     transition: .2s ease-in-out;
     cursor: pointer;
   }
@@ -69,31 +67,36 @@ const MySider: React.FC<IProps> = ({
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={['4']}
-        defaultOpenKeys={["subj1"]} // keeps 'lists' open by default
+        defaultSelectedKeys={['0']}
+        defaultOpenKeys={["lists"]} // keeps 'lists' open by default
       >
+        <Menu.Item key="0">
+          <Link to='/home'>
+            <Icon type='home' />
+            <span className="nav-text">Home</span>
+          </Link>
+        </Menu.Item>
+
         <SubMenu
-          key="subj1"
+          key="lists"
           title={
-            // <Link to='/home' style={{color:'#E2F1FF'}}>
-            <span>
+            <div>
               <Icon type="copy" />
               <span>Lists</span>
-            </span>
-            // </Link>
+            </div>
           }
         >
-          <Menu.Item key="1">
+          <Menu.Item key="lists-1">
             <Link to='/home/properties'>
               <span className="nav-text">Properties</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="2">
+          <Menu.Item key="lists-2">
             <Link to='/home/investors'>
               <span className="nav-text">Investors</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="lists-3">
             <Link to='/home/brokers'>
               <span className="nav-text">Brokers</span>
             </Link>
@@ -112,8 +115,9 @@ const MySider: React.FC<IProps> = ({
           </Link>
         </Menu.Item>
       </Menu>
-      <LogoutBtn onClick={(e) => handleLogout(e)}>
-        Logout
+      <LogoutBtn>
+        <Button type='ghost' onClick={(e) => handleLogout(e)} style={{color:'white', display: 'block', width:'100%'}}>
+          Logout</Button>
       </LogoutBtn>
     </Sider>
   )

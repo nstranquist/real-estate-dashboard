@@ -3,15 +3,16 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // import components
+import GuestRoute from './utils/GuestRoute'
 import { BaseLayout } from './components/layout'
 import Signup from './components/Auth/Signup'
 import Login from './components/Auth/Login'
+import { ResetPassword } from './components/Auth/ResetPassword';
 
 import { getUserData, getUserProfileData } from './store/profileContainer/userData/actions'
 import { authenticateUser, logout } from './store/profileContainer/auth/actions'
 import { auth } from './utils/firebaseHelper'
 import { RootState } from './store/root';
-import { ResetPassword } from './components/Auth/ResetPassword';
 
 
 interface IProps {
@@ -44,7 +45,6 @@ const App: React.FC<IProps> = ({
         getUserData()
         getUserProfileData()
       }
-      console.log('state changed. user:', user)
     } else {
       if(isAuth) {
         console.log('user logged out')
@@ -55,21 +55,16 @@ const App: React.FC<IProps> = ({
   
   return (
     <Router>
+      {/* Guest Routes */}
       <Switch>
-        <Route exact path='/signup' component={Signup} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/reset-password' component={ResetPassword} />
-        {/* {isAuth && (
-          <Route exact path='/home' component={BaseLayout} />
-        )} */}
+        <GuestRoute exact path='/signup' component={Signup} />
+        <GuestRoute exact path='/login' component={Login} />
+        <GuestRoute exact path='/reset-password' component={ResetPassword} />
         <Route path='/home' component={BaseLayout}/>
-        {/* <PrivateRoute exact path='/brokers' component={Brokers}/>
-        <PrivateRoute exact path='/investors' component={Investors}/>
-        <PrivateRoute exact path='/properties' component={Properties}/>
-        <PrivateRoute exact path='/matches' component={Matches}/>
-        <PrivateRoute exact path='/favorites' component={Favorites}/>
-        <PrivateRoute exact path='/profile' component={Profile}/> */}
-        <Route path='/' render={() => <Redirect to='/login' />} />
+        <Route path='/' render={() => {
+          if(isAuth) return <Redirect to='/home' />
+          return <Redirect to='/login' />
+        }} />
       </Switch>
     </Router>
   )

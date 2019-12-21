@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal, Form, Input, Radio } from 'antd';
-import Upload from '../_shared/Upload'
+import Upload from '../../_shared/Upload'
 
 
 // interface IProps {
@@ -82,15 +82,18 @@ class Properties extends React.Component {
     return (
       <div>
         <Button type="primary" onClick={this.showModal}>
-          Add Property
-        </Button>
+          Add Property</Button>
+        <br/>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
         />
-        <Upload accept=".json,.csv,.txt" />
+        <Upload
+          multiple={false}
+          accept=".json, .csv, .txt"
+        />
       </div>
     );
   }

@@ -46,3 +46,15 @@ export interface ProfileData {
   phone: string
   role: 'Broker' | 'Principal'
 }
+
+// property types
+export interface Property {
+  id: string
+  address: string
+  price: number
+  capRate: number
+  noi: number
+  propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'
+  yearBuilt: number
+  // isFavorite?: boolean
+}
