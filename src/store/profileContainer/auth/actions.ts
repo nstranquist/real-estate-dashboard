@@ -1,7 +1,6 @@
 import { auth, firestore } from '../../../utils/firebaseHelper'
 import { Dispatch } from 'redux'
-//import history from '../../../utils/history'
-//import getNotificationToken from '../utils/getNotificationToken'
+import { CreateProfileForm, ISignUpForm } from '../../../types'
 
 // auth/user actions
 export const attemptLogin = (email: string, password: string) => (dispatch: Dispatch, getState: any) => {
@@ -33,18 +32,20 @@ export const logout = () => (dispatch: Dispatch) => {
     })
     .catch(err => console.log('signout error: ', err))
 }
-export const attemptSignup = (firstName: string, lastName: string, email: string, password: string) => (dispatch: Dispatch, getState: any) => {
+export const attemptSignup = (userSignUp: ISignUpForm) => (dispatch: Dispatch, getState: any) => {
   if(getState().profile.auth.isAuthenticated) {
     console.log('You are already logged in. Stop.')
     return
   }
+  const { firstName, lastName, email, companyName, phone, role, password } = userSignUp
   dispatch({ type: 'LOADING_AUTH' })
 
-  auth
+  // TODO: return with success boolean flag
+  return auth
     .createUserWithEmailAndPassword(email, password)
     .then((userCreds) => {
       console.log('signup successful with data: ', userCreds)
-      dispatch({ type: 'AUTHENTICATE' })
+      // dispatch({ type: 'AUTHENTICATE' })
 
       // set token?
       // create /profiles in collection
@@ -54,7 +55,10 @@ export const attemptSignup = (firstName: string, lastName: string, email: string
           uid: userCreds.user!.uid,
           firstName,
           lastName,
-          email: userCreds.user!.email
+          email: userCreds.user!.email,
+          companyName,
+          phone,
+          role
         })
         .catch(err => console.log(err))
     })
@@ -63,6 +67,16 @@ export const attemptSignup = (firstName: string, lastName: string, email: string
       dispatch({ type: 'SET_AUTH_ERROR', err })
     })
 }
+
+// export const attemptCreateProfile = (profileData: CreateProfileForm) => (dispatch: Dispatch) => {
+//   // update account with second round of survey data
+  
+// }
+export const attemptUpdateAccount = (profileData: CreateProfileForm) => (dispatch: Dispatch) => {
+  // update account with second round of survey data
+
+}
+
 export const clearAuthErrors = () => (dispatch: Dispatch) => {
   dispatch({ type: 'CLEAR_AUTH_ERRORS' })
 }

@@ -2,33 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 // import components
-import { Form } from "antd";
-import Input from "../_shared/input";
-import Button from "../_shared/button";
-// import styled components
+import { SignUpForm } from './SignUpForm'
+// import { ProfileForm } from './ProfileForm'
 import SignUpStyleWrapper from "../../styles/signup.style";
 import Spin from "../../styles/spin.style";
 // import redux
-import { attemptSignup, clearAuthErrors } from '../../store/profileContainer/auth/actions'
+import { attemptSignup, clearAuthErrors } from '../../store/profileContainer/auth/actions'  // attemptCreateProfile
 import { RootState } from "../../store/root";
 // import types
-import { SignUpForm } from '../../types'
+import { ISignUpForm } from '../../types'  // CreateProfileForm
 
 
 interface IProps {
   isAuth: boolean
   loadingAuth: boolean
   signupError: any
-  attemptSignup(firstName: string, lastName: string, email: string, password: string): void
+  attemptSignup(userSignUp: ISignUpForm): void
   clearAuthErrors(): void
-}
-
-const emptyForm: SignUpForm = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  confPassword: ''
+  // attemptCreateProfile(userProfile: CreateProfileForm): void
 }
 
 const SignUp: React.FC<IProps> = ({
@@ -39,50 +30,33 @@ const SignUp: React.FC<IProps> = ({
   clearAuthErrors,
 }) => {
   //const [redirectToReferrer, setRedirectToReferrer] = useState(false)
-  const [formData, setFormData] = useState<SignUpForm>(emptyForm)
+  // const [formStep, setFormStep] = useState<1 | 2>(1)
   const [formErrors, setFormErrors] = useState<string | null>(null)
 
   useEffect(() => {
     clearAuthErrors() // clears errors on mount
+    // setFormStep(1)
   }, [])
 
-  const handleSignup = (e: any) => {
-    e.preventDefault()
-    // clear form errors
+  const handleSignup = (signUpForm: ISignUpForm) => {
+
     setFormErrors(null)
 
-    const { firstName, lastName, email, password, confPassword } = formData
+    const { firstName, lastName, email, companyName, phone, role, password } = signUpForm
 
-    if(password === confPassword) {
-      attemptSignup(firstName, lastName, email, password)
-      clearForm()
-    } else {
-      setFormData({
-        ...formData,
-        password: '',
-        confPassword: ''
-      })
-      setFormErrors('passwords must match')
-    }
-  };
-
-  const handleInput = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    attemptSignup({
+      firstName,
+      lastName,
+      email,
+      companyName,
+      phone,
+      role,
+      password
     })
   }
 
-  const onKeyPress = (e: any) => { 
-    if (e.which === 13) // 13 is the 'enter' key
-      handleSignup(e);
-  };
+  // const handleCreateProfile = (profileForm: CreateProfileForm) => {}
 
-  const clearForm = () => {
-    setFormData(emptyForm)
-    //setRedirectToReferrer(false)
-  }
-  
   if (isAuth)
     return <Redirect to='/home' />
 
@@ -91,7 +65,7 @@ const SignUp: React.FC<IProps> = ({
       <div className="isoSignUpContentWrapper">
         <div className="isoSignUpContent">
           <div className="isoLogoWrapper">
-            <Link to="/dashboard" style={{color:'black'}}>
+            <Link to="/login" style={{color:'black'}}>
               Create an Account</Link>
           </div>
           {/* show errors from backend and/or UI */}
@@ -100,77 +74,21 @@ const SignUp: React.FC<IProps> = ({
             </div>)}
           {formErrors && <div style={{color:'red'}}>UI Error: {formErrors}</div>}
           <Spin spinning={loadingAuth} size="large">
-            <Form className="isoSignUpForm">
-              <Form.Item className="isoInputWrapper">
-                <Input
-                  autoFocus
-                  required
-                  size="large"
-                  placeholder="First name"
-                  name='firstName'
-                  value={formData.firstName}
-                  onChange={handleInput}/>
-              </Form.Item>
-
-              <Form.Item className="isoInputWrapper">
-                <Input 
-                  required
-                  size="large"
-                  placeholder="Last name"
-                  name='lastName'
-                  value={formData.lastName}
-                  onChange={handleInput}/>
-              </Form.Item>
-
-              <Form.Item className="isoInputWrapper">
-                <Input
-                  required
-                  size="large"
-                  placeholder="Email"
-                  name='email'
-                  value={formData.email}
-                  onChange={handleInput}
-                  autoFocus
-                />
-              </Form.Item>
-
-              <Form.Item className="isoInputWrapper">
-                <Input
-                  required
-                  size="large"
-                  type="password"
-                  placeholder="Password"
-                  name='password'
-                  value={formData.password}
-                  onChange={handleInput}
-                  onKeyPress={onKeyPress}
-                />
-              </Form.Item>
-              <Form.Item className="isoInputWrapper">
-                <Input
-                  required
-                  size="large"
-                  type="password"
-                  placeholder="Confirm Password"
-                  name='confPassword'
-                  value={formData.confPassword}
-                  onChange={handleInput}
-                  onKeyPress={onKeyPress}
-                />
-              </Form.Item>
-
-              <Form.Item className="isoInputWrapper isoLeftRightComponent">
-                <Button type="primary" onClick={handleSignup}>
-                  Sign Up</Button>
-              </Form.Item>
-
-              <Form.Item className="isoCenterComponent isoHelperWrapper">
-                {/* <Link to="/forgotpassword" className="isoForgotPass">
-                  Rest Password</Link> */}
-                <Link to="/login">
-                  Already have an account? Log in</Link>
-              </Form.Item>
-            </Form>
+            <SignUpForm
+              submitForm={handleSignup}
+              setErrors={setFormErrors}
+            />
+            {/* {formStep === 1 ? (
+              <SignUpForm
+                submitForm={handleSignup}
+                setErrors={setFormErrors} // could make these errors into separate errors per form
+              />
+            ) : (
+              <ProfileForm
+                submitForm={handleCreateProfile}
+                setErrors={setFormErrors}
+              />
+            )} */}
           </Spin>
         </div>
       </div>
@@ -186,5 +104,5 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(
   mapStateToProps,
-  { attemptSignup, clearAuthErrors }
+  { attemptSignup, clearAuthErrors } // attemptCreateProfile
 )(SignUp);

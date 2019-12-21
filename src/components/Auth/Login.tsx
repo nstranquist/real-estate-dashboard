@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components'
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+// import components
 import { Form, Input, Button, Icon } from 'antd'
-
-//import Input from "../_shared/input";
-//import Button from "../_shared/button";
 import SignInStyleWrapper from "../../styles/signin.style";
 import Spin from "../../styles/spin.style";
-
+// import redux
 import { attemptLogin, clearAuthErrors } from '../../store/profileContainer/auth/actions'
 import { RootState } from "../../store/root";
+// import types
+import { SignInForm } from "../../types";
 
 
 interface IProps {
@@ -21,6 +20,12 @@ interface IProps {
   clearAuthErrors(): void
 }
 
+const emptyForm: SignInForm = {
+  email: '',
+  password: '',
+  rememberMe: false
+}
+
 const SignIn: React.FC<IProps> = ({
   isAuth,
   loadingAuth,
@@ -29,106 +34,103 @@ const SignIn: React.FC<IProps> = ({
   clearAuthErrors,
 }) => {
   //const [redirectToReferrer, setRedirectToReferrer] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [formData, setFormData] = useState<SignInForm>(emptyForm)
+  const [formErrors, setFormErrors] = useState<string | null>(null)
 
   useEffect(() => {
-    console.log('called useEffect')
     clearAuthErrors()
   }, [])
 
   const handleLogin = (e: any) => {
     e.preventDefault()
-    console.log('signing in')
+    setFormErrors(null)
+
+    const {email, password, rememberMe} = formData
+
     attemptLogin(email, password)
     clearForm()
-  };
-  const clearForm = () => { // is this needed? can test...
-    setEmail('')
-    setPassword('')
-    //setRedirectToReferrer(false)
   }
+
+  const handleInput = (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
   const onKeyPress = (e: any) => {
     if (e.which === 13)
-      handleLogin(e);
-  };
-
-  const onEmailChange = (event: any) => {
-    const value = event.target.value;
-    setEmail(value)
-  };
-  const onPassChange = (event: any) => {
-    const value = event.target.value;
-    setPassword(value)
-  };
-    
-  //const from = { pathname: "/home" };
-  if (isAuth) {
-    return <Redirect to='/home' />
+      handleLogin(e)
   }
 
-    return (
-      <SignInStyleWrapper className="isoSignInPage">
-        <div className="isoLoginContentWrapper">
-          <div className="isoLoginContent">
-            <div className="isoLogoWrapper">
-              <Link to="/dashboard" style={{color: 'black'}}>
-                Sign in to Brokerage Dashboard
-                {/* <IntlMessages id="EDURain Sign In" /> */}
-              </Link>
-            </div>
-            {loginError && (<div style={{color: 'red'}}>
-                <p>Error: Could not sign in</p>
-                <p>{loginError.message}</p>
-              </div>)}
-            <Spin spinning={loadingAuth} size="large">
-              <Form className="isoSignInForm">
-                <Form.Item className="isoInputWrapper">
-                  <Input
-                    autoFocus
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.45)' }} />}
-                    size="large"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={onEmailChange}
-                  />
-                </Form.Item>
+  const clearForm = () => {
+    setFormData(emptyForm)
+    //setRedirectToReferrer(false)
+  }
+    
+  if (isAuth)
+    return <Redirect to='/home' />
 
-                <Form.Item className="isoInputWrapper">
-                  <Input
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.45)' }} />}
-                    size="large"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={onPassChange}
-                    onKeyPress={onKeyPress}
-                  />
-                </Form.Item>
-
-                <Form.Item className="isoInputWrapper isoLeftRightComponent">
-                  <Button type="primary" onClick={(e: any) => handleLogin(e)}>
-                    Sign In
-                    {/* <IntlMessages id="page.signInButton" /> */}
-                  </Button>
-                </Form.Item>
-
-                <Form.Item className="isoCenterComponent isoHelperWrapper">
-                  {/* <Link to="/forgotpassword" className="isoForgotPass">
-                    <IntlMessages id="page.signInForgotPass" />
-                  </Link> */}
-                  <Link to="/signup">
-                    No Account? Create an Account
-                    {/* <IntlMessages id="page.signInCreateAccount" /> */}
-                  </Link>
-                </Form.Item>
-              </Form>
-            </Spin>
+  return (
+    <SignInStyleWrapper className="isoSignInPage">
+      <div className="isoLoginContentWrapper">
+        <div className="isoLoginContent">
+          <div className="isoLogoWrapper">
+            <Link to="/login" style={{color: 'black'}}>
+              Sign in to Brokerage Dashboard</Link>
           </div>
+          {loginError && (<div style={{color: 'red'}}>
+              <p>Error: {loginError.message}</p>
+            </div>)}
+          {formErrors && <div style={{color: 'red'}}>Error: {formErrors}</div>}
+          <Spin spinning={loadingAuth} size="large">
+            <Form className="isoSignInForm">
+              <Form.Item className="isoInputWrapper">
+                <Input
+                  autoFocus
+                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.45)' }} />}
+                  size="large"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleInput}
+                />
+              </Form.Item>
+
+              <Form.Item className="isoInputWrapper">
+                <Input
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.45)' }} />}
+                  size="large"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInput}
+                  onKeyPress={onKeyPress}
+                />
+              </Form.Item>
+
+              {/* TODO: add 'rememberMe' toggle here */}
+
+              <Form.Item className="isoInputWrapper isoLeftRightComponent">
+                <Button type="primary" onClick={handleLogin} style={{display:'block', width:'100%', marginTop:5}}>
+                  Sign In</Button>
+              </Form.Item>
+
+              <Form.Item className="isoCenterComponent" style={{textAlign:'center'}}>
+                <Link to="/reset-password">
+                  Forgot Password</Link>
+                <br />
+                <Link to="/signup">
+                  No Account? Create an Account</Link>
+              </Form.Item>
+            </Form>
+          </Spin>
         </div>
-      </SignInStyleWrapper>
-    );
+      </div>
+    </SignInStyleWrapper>
+  );
 }
 
 const mapStateToProps = (state: RootState) => ({
@@ -141,14 +143,3 @@ export default connect(
   mapStateToProps,
   { attemptLogin, clearAuthErrors }
 )(SignIn);
-
-
-// OLD CODE:
-  //componentWillReceiveProps(nextProps) {
-  //  if (
-  //    this.props.isAuth !== nextProps.isLoggedIn &&
-  //    nextProps.isLoggedIn === true
-  //  ) {
-  //    this.setState({ redirectToReferrer: true });
-  //  }
-  //}

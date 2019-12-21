@@ -11,6 +11,7 @@ import { getUserData, getUserPrivateData } from './store/profileContainer/userDa
 import { authenticateUser, logout } from './store/profileContainer/auth/actions'
 import { auth } from './utils/firebaseHelper'
 import { RootState } from './store/root';
+import { ResetPassword } from './components/Auth/ResetPassword';
 
 
 interface IProps {
@@ -57,6 +58,7 @@ const App: React.FC<IProps> = ({
       <Switch>
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/reset-password' component={ResetPassword} />
         {/* {isAuth && (
           <Route exact path='/home' component={BaseLayout} />
         )} */}
