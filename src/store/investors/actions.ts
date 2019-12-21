@@ -1,37 +1,80 @@
-import { firestore } from '../../utils/firebaseHelper'
+import { auth, firestore } from '../../utils/firebaseHelper'
 import { Dispatch } from 'redux'
-import { Property } from '../../types'
+import { Investor } from '../../types'
 
-export const getProperties = () => (dispatch: Dispatch,  getState: any) => {
-  console.log('dispatching getProperties')
-  dispatch({ type: 'LOADING_PROPERTIES' })
+export const getInvestors = () => (dispatch: Dispatch,  getState: any) => {
+  console.log('dispatching getInvestors')
+  dispatch({ type: 'LOADING_INVESTORS' })
   firestore
-    .collection('properties')
+    .collection(`/profiles/${auth.currentUser!.uid}/investors`)
     //.orderBy('index')
     .limit(20)
     .get()
     .then((snap) => {
-      let properties: Property[] = snap.docs.map(property => ({
-        id: property.id,
-        address: property.data()!.address,
-        price: property.data()!.price,
-        capRate: property.data()!.capRate,
-        noi: property.data()!.noi,
-        propertyType: property.data()!.propertyType,
-        yearBuilt: property.data()!.yearBuilt,
+      let investors: Investor[] = snap.docs.map(investor => ({
+        id: investor.id,
+        firstName: investor.data()!.firstName,
+        lastName: investor.data()!.lastName,
+        email: investor.data()!.email,
+        companyName: investor.data()!.companyName,
+        officePhone: investor.data()!.officePhone,
+        cellPhone: investor.data()!.cellPhone,
+        address: investor.data()!.address,
+        city: investor.data()!.city,
+        state: investor.data()!.state,
+        zipcode: investor.data()!.zipcode,
+        role: investor.data()!.role,
+        priceMin: investor.data()!.priceMin,
+        priceMax: investor.data()!.priceMax,
+        propertyType: investor.data()!.propertyType,
+        regions: investor.data()!.regions,
+        leaseType: investor.data()!.leaseTypes,
+        propertyStatus: investor.data()!.propertyStatus,
+        is1031: investor.data()!.is1031,
       }))
       dispatch({
-        type: 'GET_PROPERTIES',
-        properties
+        type: 'GET_INVESTORS',
+        investors
       })
     })
-    .catch(err => {
-      console.log(err)
-      dispatch({ type: 'SET_PROPERTIES_ERROR', err})
+    .catch(err => dispatch({ type: 'SET_INVESTORS_ERROR', err}))
+}
+
+export const addInvestor = (investor: Investor) => (dispatch: Dispatch) => {
+  console.log('investor to add:', investor)
+  // will have to not require id for 'Investor' type
+}
+
+export const updateInvestor = (investor: Investor) => (dispatch: Dispatch) => {
+  console.log('investor to update:', investor)
+  firestore
+    .doc(`profiles/${auth.currentUser!.uid}/investors/${investor.id}`)
+    .update({
+      ...investor
+    })
+    .then(() => {
+      console.log('update successful!')
+      // update from store
+      dispatch({
+        type: 'UPDATE_INVESTOR',
+        investor
+      })
     })
 }
 
-export const setPropertiesFilter = (filter: string) => ({
-  type: 'SET_PROPERTIES_FILTER',
-  filter
-})
+export const deleteInvestor = (id: string) => (dispatch: Dispatch) => {
+  console.log('investor id to delete:', id)
+  firestore
+    .doc(`profiles/${auth.currentUser!.uid}/investors/${id}`)
+    .delete()
+    .then(() => {
+      console.log('delete successful')
+      dispatch({ type: 'DELETE_INVESTOR', id})
+    })
+    .catch(err => dispatch({ type: 'SET_INVESTORS_ERROR', err}))
+}
+
+// export const setInvestorsFilter = (filter: string) => ({
+//   type: 'SET_INVESTORS_FILTER',
+//   filter
+// })

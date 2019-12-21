@@ -1,33 +1,45 @@
 
-import { Property } from '../../types'
+import { Investor } from '../../types'
 
-export interface PropertiesState {
-  properties: Property[]
+export interface InvestorsState {
+  investors: Investor[]
   filter: string
   loading: boolean
   errors: any
 }
 
-export interface getProperties {
-  readonly type: 'GET_PROPERTIES'
-  properties: Property[]
+export interface getInvestors {
+  readonly type: 'GET_INVESTORS'
+  investors: Investor[]
 }
-export interface setPropertiesFilter {
-  readonly type: 'SET_PROPERTIES_FILTER'
-  filter: string
+export interface addInvestor {
+  readonly type: 'ADD_INVESTOR'
+  investor: Investor
 }
-export interface toggleFavoriteProperty {
-  readonly type: 'TOGGLE_FAVORITE_PROPERTY'
-  index: number
+export interface updateInvestor {
+  readonly type: 'UPDATE_INVESTOR'
+  investor: Investor
 }
-export interface setPropertiesError {
-  readonly type: 'SET_PROPERTIES_ERROR'
-  err: any
+export interface deleteInvestor {
+  readonly type: 'DELETE_INVESTOR'
+  id: string
 }
 
-export type PropertyActionTypes = 
-  | getProperties
-  | setPropertiesError
-  | toggleFavoriteProperty
-  | setPropertiesFilter
-  | { type: 'LOADING_PROPERTIES' }
+export interface setInvestorsFilter {
+  readonly type: 'SET_INVESTORS_FILTER'
+  filter: string
+}
+// export interface toggleFavoriteInvestor {
+//   readonly type: 'TOGGLE_FAVORITE_PROPERTY'
+//   index: number
+// }
+
+export type InvestorActionTypes = 
+  | getInvestors
+  | addInvestor
+  | updateInvestor
+  | deleteInvestor
+  | setInvestorsFilter
+  | { readonly type: 'SET_INVESTORS_ERROR', err: any }
+  | { readonly type: 'LOADING_INVESTORS' }
+  // | toggleFavoriteInvestor

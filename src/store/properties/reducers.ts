@@ -28,30 +28,30 @@ export default (
       }
     case 'ADD_PROPERTY':
       // NOTE: shallow copy errors possible here
-      let newProperties: Property[] = [...state.properties]
-      newProperties.push(action.property)
-      console.log('new properties after add:', newProperties)
+      let newPropertiesAdd: Property[] = [...state.properties]
+      newPropertiesAdd.push(action.property)
+      console.log('new properties after add:', newPropertiesAdd)
       return {
         ...state,
-        properties: newProperties
+        properties: newPropertiesAdd
       }
     case 'UPDATE_PROPERTY':
-      newProperties = [...state.properties]
-      let index = newProperties.findIndex(property => property.id === action.property.id)
-      newProperties[index] = action.property
-      console.log('new properties after edit:', newProperties)
+      let newPropertiesUpdate = [...state.properties]
+      let index = newPropertiesUpdate.findIndex(property => property.id === action.property.id)
+      newPropertiesUpdate[index] = action.property
+      console.log('new properties after edit:', newPropertiesUpdate)
       return {
         ...state,
-        properties: newProperties
+        properties: newPropertiesUpdate
       }
     case 'DELETE_PROPERTY':
-      newProperties = [...state.properties]
-      let propertyIndex = newProperties.findIndex(property => property.id === action.id)
-      newProperties.splice(propertyIndex, 1)
-      console.log('new properties after delete:', newProperties)
+      let newPropertiesDelete= [...state.properties]
+      let propertyIndex = newPropertiesDelete.findIndex(property => property.id === action.id)
+      newPropertiesDelete.splice(propertyIndex, 1)
+      console.log('new properties after delete:', newPropertiesDelete)
       return {
         ...state,
-        properties: newProperties
+        properties: newPropertiesDelete
       }
     case 'SET_PROPERTIES_FILTER':
       return {

@@ -10,6 +10,9 @@ import Login from './components/Auth/Login'
 import { ResetPassword } from './components/Auth/ResetPassword';
 
 import { getUserData, getUserProfileData } from './store/profileContainer/userData/actions'
+import { getProperties } from './store/properties/actions'
+import { getInvestors } from './store/investors/actions'
+import { getBrokers } from './store/brokers/actions'
 import { authenticateUser, logout } from './store/profileContainer/auth/actions'
 import { auth } from './utils/firebaseHelper'
 import { RootState } from './store/root';
@@ -19,6 +22,9 @@ interface IProps {
   isAuth: boolean
   getUserData(): void
   getUserProfileData(): void
+  getProperties(): void
+  getInvestors(): void
+  getBrokers(): void
   authenticateUser(): void
   logout(): void
 }
@@ -27,6 +33,9 @@ const App: React.FC<IProps> = ({
   isAuth,
   getUserData,
   getUserProfileData,
+  getProperties,
+  getInvestors,
+  getBrokers,
   authenticateUser,
   logout
 }) => {
@@ -40,10 +49,14 @@ const App: React.FC<IProps> = ({
         getUserProfileData()
       }
       else {
-        console.log('not authenticated. wut')
+        console.log('not authenticated')
         authenticateUser()
-        getUserData()
+        // getUserData()
         getUserProfileData()
+        // NOTE: in future, can just get the 'sneakPeak' of the listTypes data. For now, getting all
+        getProperties()
+        getInvestors()
+        getBrokers()
       }
     } else {
       if(isAuth) {
@@ -76,7 +89,8 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(
   mapStateToProps,
-  { getUserData, getUserProfileData, authenticateUser, logout }
+  { getUserData, getUserProfileData, authenticateUser, logout,
+    getProperties, getInvestors, getBrokers }
 )(App)
 
 // const contentStyle = {

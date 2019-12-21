@@ -1,69 +1,81 @@
 import React from 'react'
 import { Table, Divider } from 'antd'
-import { Property } from '../../../types'
+import { Broker } from '../../../types'
 
-const data: Property[] = [
-  {
-    id: '1',
-    address: '1238 Tamm Ave.',
-    price: 310000, // TODO: format prices from number to string
-    capRate: 18,
-    noi: 30000, // TODO: format this too
-    propertyType: 'Retail',
-    yearBuilt: 1896
-  },
-  {
-    id: '2',
-    address: '2111 White Lane Dr.',
-    price: 580000,
-    capRate: 12,
-    noi: 25000,
-    propertyType: 'Retail',
-    yearBuilt: 1980
-  },
-  {
-    id: '3',
-    address: '13001 King Arthur Ln.',
-    price: 240000,
-    capRate: 8,
-    noi: 10000,
-    propertyType: 'Multi-Family',
-    yearBuilt: 1986
-  },
-]
+// const data: Property[] = [
+//   {
+//     id: '1',
+//     address: '1238 Tamm Ave.',
+//     price: 310000, // TODO: format prices from number to string
+//     capRate: 18,
+//     noi: 30000, // TODO: format this too
+//     propertyType: 'Retail',
+//     yearBuilt: 1896
+//   },
+//   {
+//     id: '2',
+//     address: '2111 White Lane Dr.',
+//     price: 580000,
+//     capRate: 12,
+//     noi: 25000,
+//     propertyType: 'Retail',
+//     yearBuilt: 1980
+//   },
+//   {
+//     id: '3',
+//     address: '13001 King Arthur Ln.',
+//     price: 240000,
+//     capRate: 8,
+//     noi: 10000,
+//     propertyType: 'Multi-Family',
+//     yearBuilt: 1986
+//   },
+// ]
 
 interface IProps {
-  handleEdit(property: Property, listType: string): void
+  loading: boolean
+  brokersData: Broker[]
+  handleEdit(broker: Broker, listType: string): void
   handleDelete(id: string, listType: string): void
 }
 
 export const BrokersTable: React.FC<IProps> = ({
+  loading,
+  brokersData,
   handleEdit,
   handleDelete
 }) => {
   const columns = [
     {
-      title: 'Address',
-      dataIndex:'address',
-      key:'address',
-      render: (text: string) => <a>{text}</a>,
+      title: 'First Name',
+      dataIndex:'firstName',
+      key:'firstName',
     },
     {
-      title: 'Price',
-      dataIndex:'price',
-      key:'price',
+      title: 'Last Name',
+      dataIndex:'lastName',
+      key:'lastName',
     },
     {
-      title: 'Cap Rate',
-      dataIndex:'capRate',
-      key:'capRate',
-      render: (value: number) => <span>{`${value}%`}</span>
+      title: 'Email',
+      dataIndex:'email',
+      key:'email',
+      render: (email: string) => <a>{email}</a>
     },
     {
-      title: 'NOI',
-      dataIndex:'noi',
-      key:'noi',
-      render: (value: number) => <span>{`$${value}`}</span>
+      title: 'Office Phone',
+      dataIndex:'officePhone',
+      key:'officePhone',
+    },
+    {
+      title: 'Cell Phone',
+      dataIndex:'cellPhone',
+      key:'cellPhone',
+    },
+    {
+      title: 'Company Name',
+      dataIndex:'companyName',
+      key:'companyName',
     },
     {
       title: 'Property Type',
@@ -71,9 +83,27 @@ export const BrokersTable: React.FC<IProps> = ({
       key:'propertyType',
     },
     {
-      title: 'Year Built',
-      dataIndex:'yearBuilt',
-      key:'yearBuilt',
+      title: 'City',
+      dataIndex:'city',
+      key:'city',
+    },
+    {
+      title: 'State',
+      dataIndex:'state',
+      key:'state',
+    },
+    {
+      title: 'Type',
+      dataIndex:'type',
+      key:'type',
+      // TODO: add <select> render
+      render: (text: string) => (
+        <select value={text}>
+          <option value="Sales">Sales</option>
+          <option value="Leasing">Leasing</option>
+          <option value="Both">Both</option>
+        </select>
+      )
     },
     {
       title: 'Action',
@@ -90,8 +120,9 @@ export const BrokersTable: React.FC<IProps> = ({
 
   return (
     <Table
+      loading={loading}
       columns={columns}
-      dataSource={data}
+      dataSource={brokersData}
     />
   )
 }

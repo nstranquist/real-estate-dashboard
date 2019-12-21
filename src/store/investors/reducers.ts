@@ -1,7 +1,7 @@
-import { PropertiesState, PropertyActionTypes } from './types'
+import { InvestorsState, InvestorActionTypes } from './types'
 
-const initialState: PropertiesState = {
-  properties: [],
+const initialState: InvestorsState = {
+  investors: [],
   filter: 'all',
   loading: false,
   errors: null
@@ -9,42 +9,46 @@ const initialState: PropertiesState = {
 
 export default (
   state = initialState,
-  action: PropertyActionTypes
-): PropertiesState => {
+  action: InvestorActionTypes
+): InvestorsState => {
   switch (action.type) {
-    case 'LOADING_PROPERTIES':
+    case 'LOADING_INVESTORS':
       return {
         ...state,
         loading: true
       }
-    case 'GET_PROPERTIES':
-      console.log('reduced getProperties')
+    case 'GET_INVESTORS':
+      console.log('reduced getInvestors')
       return {
         ...state,
-        properties: action.properties,
+        investors: action.investors,
         loading: false,
         errors: null
       }
-    case 'SET_PROPERTIES_FILTER':
+    case 'ADD_INVESTOR':
       return {
         ...state,
-        properties: [ // spread operator is only a shallow operation
-          ...state.properties
+
+      }
+    case 'UPDATE_INVESTOR':
+      return {
+        ...state,
+        
+      }
+    case 'DELETE_INVESTOR':
+      return {
+        ...state,
+        
+      }
+    case 'SET_INVESTORS_FILTER':
+      return {
+        ...state,
+        investors: [ // spread operator is only a shallow operation
+          ...state.investors
         ],
         filter: action.filter
       }
-    // case 'TOGGLE_FAVORITE_PROPERTY':
-    //   // find property in array by id that needs to be toggled
-    //   const newProperties = state.properties.map(property => {
-    //     if(property.index === action.index)
-    //       property.isFavorite = !property.isFavorite  //toggles property
-    //     return property
-    //   })
-    //   return {
-    //     ...state,
-    //     properties: newProperties
-    //   }
-    case 'SET_PROPERTIES_ERROR':
+    case 'SET_INVESTORS_ERROR':
       return {
         ...state,
         errors: action.err,
@@ -54,3 +58,15 @@ export default (
       return state
   }
 }
+
+  // case 'TOGGLE_FAVORITE_PROPERTY':
+  //   // find property in array by id that needs to be toggled
+  //   const newProperties = state.properties.map(property => {
+  //     if(property.index === action.index)
+  //       property.isFavorite = !property.isFavorite  //toggles property
+  //     return property
+  //   })
+  //   return {
+  //     ...state,
+  //     properties: newProperties
+  //   }

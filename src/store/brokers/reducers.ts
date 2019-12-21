@@ -1,7 +1,7 @@
-import { PropertiesState, PropertyActionTypes } from './types'
+import { BrokersState, BrokerActionTypes } from './types'
 
-const initialState: PropertiesState = {
-  properties: [],
+const initialState: BrokersState = {
+  brokers: [],
   filter: 'all',
   loading: false,
   errors: null
@@ -9,27 +9,42 @@ const initialState: PropertiesState = {
 
 export default (
   state = initialState,
-  action: PropertyActionTypes
-): PropertiesState => {
+  action: BrokerActionTypes
+): BrokersState => {
   switch (action.type) {
-    case 'LOADING_PROPERTIES':
+    case 'LOADING_BROKERS':
       return {
         ...state,
         loading: true
       }
-    case 'GET_PROPERTIES':
-      console.log('reduced getProperties')
+    case 'GET_BROKERS':
+      console.log('reduced getBrokers')
       return {
         ...state,
-        properties: action.properties,
+        brokers: action.brokers,
         loading: false,
         errors: null
       }
-    case 'SET_PROPERTIES_FILTER':
+    case 'ADD_BROKER':
       return {
         ...state,
-        properties: [ // spread operator is only a shallow operation
-          ...state.properties
+
+      }
+    case 'UPDATE_BROKER':
+      return {
+        ...state,
+        
+      }
+    case 'DELETE_BROKER':
+      return {
+        ...state,
+        
+      }
+    case 'SET_BROKERS_FILTER':
+      return {
+        ...state,
+        brokers: [ // spread operator is only a shallow operation
+          ...state.brokers
         ],
         filter: action.filter
       }
@@ -44,7 +59,7 @@ export default (
     //     ...state,
     //     properties: newProperties
     //   }
-    case 'SET_PROPERTIES_ERROR':
+    case 'SET_BROKERS_ERROR':
       return {
         ...state,
         errors: action.err,

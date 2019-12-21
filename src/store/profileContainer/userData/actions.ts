@@ -5,28 +5,31 @@ import { ProfileData } from '../../../types'
 
 
 export const getUserData = () => (dispatch: Dispatch) => {
-  console.log('get user data thunk here')
+  console.log('get user data in thunk')
   dispatch({ type: 'LOADING_USER_DATA' })
 
   // TODO: dispose of snapshot listener when necessary
-  return firestore
-    .doc(`profiles/${auth.currentUser!.uid}`)
-    .get()
-    .then((doc) => {
-      console.log('snapshot of userdata:', doc)
-      console.log('doc data:', doc.data())
-      dispatch({
-        type: 'SET_USER_DATA',
-        myProperties: doc.data()!.myProperties,
-        myInvestors: doc.data()!.myInvestors,
-        matchedProperties: doc.data()!.matchedProperties,
-        matchedInvestors: doc.data()!.matchedInvestors,
-      })
-    })
-    .catch((err) => {
-      console.log('error: ', err)
-      dispatch({ type: 'SET_USER_DATA_ERROR', err })
-    })
+  // const properties = firestore
+  //   .collection(`profiles/${auth.currentUser!.uid}/properties`)
+  //   .get()
+  //   .then((querySnap) => querySnap.docs )
+  //   .catch((err) => dispatch({ type: 'SET_USER_DATA_ERROR', err }))
+
+  // const investors = firestore
+  //   .collection(`profiles/${auth.currentUser!.uid}/investors`)
+  //   .get()
+  //   .then((querySnap) => querySnap.docs )
+  //   .catch((err) => dispatch({ type: 'SET_USER_DATA_ERROR', err }))
+
+  // const brokers = firestore
+  //   .collection(`profiles/${auth.currentUser!.uid}/brokers`)
+  //   .get()
+  //   .then((querySnap) => querySnap.docs )
+  //   .catch((err) => dispatch({ type: 'SET_USER_DATA_ERROR', err }))
+
+  // const userData = {
+    
+  // }
 }
 
 export const getUserProfileData = () => (dispatch: Dispatch) => {

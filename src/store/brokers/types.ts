@@ -1,33 +1,45 @@
 
-import { Property } from '../../types'
+import { Broker } from '../../types'
 
-export interface PropertiesState {
-  properties: Property[]
+export interface BrokersState {
+  brokers: Broker[]
   filter: string
   loading: boolean
   errors: any
 }
 
-export interface getProperties {
-  readonly type: 'GET_PROPERTIES'
-  properties: Property[]
+export interface getBrokers {
+  readonly type: 'GET_BROKERS'
+  brokers: Broker[]
 }
-export interface setPropertiesFilter {
-  readonly type: 'SET_PROPERTIES_FILTER'
-  filter: string
+export interface addBroker {
+  readonly type: 'ADD_BROKER'
+  broker: Broker
 }
-export interface toggleFavoriteProperty {
-  readonly type: 'TOGGLE_FAVORITE_PROPERTY'
-  index: number
+export interface updateBroker {
+  readonly type: 'UPDATE_BROKER'
+  broker: Broker
 }
-export interface setPropertiesError {
-  readonly type: 'SET_PROPERTIES_ERROR'
-  err: any
+export interface deleteBroker {
+  readonly type: 'DELETE_BROKER'
+  id: string
 }
 
-export type PropertyActionTypes = 
-  | getProperties
-  | setPropertiesError
-  | toggleFavoriteProperty
-  | setPropertiesFilter
-  | { type: 'LOADING_PROPERTIES' }
+export interface setBrokersFilter {
+  readonly type: 'SET_BROKERS_FILTER'
+  filter: string
+}
+// export interface toggleFavoriteBroker {
+//   readonly type: 'TOGGLE_FAVORITE_BROKER'
+//   index: number
+// }
+
+export type BrokerActionTypes = 
+  | getBrokers
+  | addBroker
+  | updateBroker
+  | deleteBroker
+  | setBrokersFilter
+  | { readonly type: 'SET_BROKERS_ERROR', err: any }
+  | { readonly type: 'LOADING_BROKERS' }
+  // | toggleFavoriteBroker

@@ -1,43 +1,47 @@
 import React from 'react'
 import { Table, Divider } from 'antd'
-import { Property } from '../../../types'
+import { Investor } from '../../../types'
 
-const data: Property[] = [
-  {
-    id: '1',
-    address: '1238 Tamm Ave.',
-    price: 310000, // TODO: format prices from number to string
-    capRate: 18,
-    noi: 30000, // TODO: format this too
-    propertyType: 'Multi-Family',
-    yearBuilt: 1896
-  },
-  {
-    id: '2',
-    address: '2111 White Lane Dr.',
-    price: 580000,
-    capRate: 12,
-    noi: 25000,
-    propertyType: 'Retail',
-    yearBuilt: 1980
-  },
-  {
-    id: '3',
-    address: '13001 King Arthur Ln.',
-    price: 240000,
-    capRate: 8,
-    noi: 10000,
-    propertyType: 'Retail',
-    yearBuilt: 1986
-  },
-]
+// const data: Investor[] = [
+//   {
+//     id: '1',
+//     address: '1238 Tamm Ave.',
+//     price: 310000, // TODO: format prices from number to string
+//     capRate: 18,
+//     noi: 30000, // TODO: format this too
+//     propertyType: 'Multi-Family',
+//     yearBuilt: 1896
+//   },
+//   {
+//     id: '2',
+//     address: '2111 White Lane Dr.',
+//     price: 580000,
+//     capRate: 12,
+//     noi: 25000,
+//     propertyType: 'Retail',
+//     yearBuilt: 1980
+//   },
+//   {
+//     id: '3',
+//     address: '13001 King Arthur Ln.',
+//     price: 240000,
+//     capRate: 8,
+//     noi: 10000,
+//     propertyType: 'Retail',
+//     yearBuilt: 1986
+//   },
+// ]
 
 interface IProps {
-  handleEdit(property: Property, listType: string): void
+  loading: boolean
+  investorsData: Investor[]
+  handleEdit(investor: Investor, listType: string): void
   handleDelete(id: string, listType: string): void
 }
 
 export const InvestorsTable: React.FC<IProps> = ({
+  loading,
+  investorsData,
   handleEdit,
   handleDelete
 }) => {
@@ -90,8 +94,9 @@ export const InvestorsTable: React.FC<IProps> = ({
 
   return (
     <Table
+      loading={loading}
       columns={columns}
-      dataSource={data}
+      dataSource={investorsData}
     />
   )
 }
