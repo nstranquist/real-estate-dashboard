@@ -1,41 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
+import styled from 'styled-components'
 import { Table, Divider } from 'antd'
 import { Broker } from '../../../types'
 
-// const data: Property[] = [
-//   {
-//     id: '1',
-//     address: '1238 Tamm Ave.',
-//     price: 310000, // TODO: format prices from number to string
-//     capRate: 18,
-//     noi: 30000, // TODO: format this too
-//     propertyType: 'Retail',
-//     yearBuilt: 1896
-//   },
-//   {
-//     id: '2',
-//     address: '2111 White Lane Dr.',
-//     price: 580000,
-//     capRate: 12,
-//     noi: 25000,
-//     propertyType: 'Retail',
-//     yearBuilt: 1980
-//   },
-//   {
-//     id: '3',
-//     address: '13001 King Arthur Ln.',
-//     price: 240000,
-//     capRate: 8,
-//     noi: 10000,
-//     propertyType: 'Multi-Family',
-//     yearBuilt: 1986
-//   },
-// ]
+const StyledTable = styled(Table)`
+  overflow-wrap: normal;
+  word-break: normal;
 
+  .ant-table-row-cell-break-word {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .ant-table-thead > tr > th {
+    padding: 16px 8px;
+    overflow-wrap: normal;
+    break-word: normal;
+  }
+  .ant-table-tbody > tr > td {
+    padding: 16px 8px;
+    // overflow-wrap: normal;
+    // break-word: normal;
+  }
+`
+// word-break: break-all;
 interface IProps {
   loading: boolean
   brokersData: Broker[]
-  handleEdit(broker: Broker, listType: string): void
+  handleEdit(broker: Broker): void
   handleDelete(id: string, listType: string): void
 }
 
@@ -45,58 +36,74 @@ export const BrokersTable: React.FC<IProps> = ({
   handleEdit,
   handleDelete
 }) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+
+  const handleSelect = (selectedKeys: any) => {
+    console.log('selected keys changed:', selectedKeys)
+    //setSelectedKeys(selectedKeys)
+  }
+
   const columns = [
     {
       title: 'First Name',
       dataIndex:'firstName',
       key:'firstName',
+      width: 100,
     },
     {
       title: 'Last Name',
       dataIndex:'lastName',
       key:'lastName',
+      width: 100,
     },
     {
       title: 'Email',
       dataIndex:'email',
       key:'email',
+      width: 200,
       render: (email: string) => <a>{email}</a>
     },
     {
       title: 'Office Phone',
       dataIndex:'officePhone',
       key:'officePhone',
+      width: 100,
     },
     {
       title: 'Cell Phone',
       dataIndex:'cellPhone',
       key:'cellPhone',
+      width: 100,
     },
     {
       title: 'Company Name',
       dataIndex:'companyName',
       key:'companyName',
+      width: 100,
     },
     {
       title: 'Property Type',
       dataIndex:'propertyType',
       key:'propertyType',
+      width: 100,
     },
     {
       title: 'City',
       dataIndex:'city',
       key:'city',
+      width: 100,
     },
     {
       title: 'State',
       dataIndex:'state',
       key:'state',
+      width: 60,
     },
     {
       title: 'Type',
       dataIndex:'type',
       key:'type',
-      // TODO: add <select> render
+      width: 100,
       render: (text: string) => (
         <select value={text}>
           <option value="Sales">Sales</option>
@@ -105,22 +112,23 @@ export const BrokersTable: React.FC<IProps> = ({
         </select>
       )
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text: string, record: any) => (
-        <span>
-          <a onClick={() => handleEdit(record, 'broker')}>Edit</a> {/*  {record.address} */}
-          <Divider type="vertical" />
-          <a onClick={() => handleDelete(record.id, 'broker')}>Delete</a>
-        </span>
-      ),
-    },
   ]
 
+  const rowSelection = {
+    onChange: (selectedRowKeys: string[] | number[], selectedRows: any[]) => {
+      console.log('selectedRowKeys type:', typeof selectedRowKeys, 'selectedRows:', selectedRows)
+    },
+    getCheckboxProps: (record: any) => ({
+      id: record.id
+    })
+  }
+
   return (
-    <Table
+    <StyledTable
+      rowKey='id'
+      scroll={{x: '1000px'}}
       loading={loading}
+      rowSelection={rowSelection}
       columns={columns}
       dataSource={brokersData}
     />
@@ -138,3 +146,16 @@ export const BrokersTable: React.FC<IProps> = ({
   //       </Popconfirm>
   //     ) : null,
   // },
+
+  //{
+    //   title: 'Action',
+    //   key: 'action',
+    //   width: 70,
+    //   render: (text: string, record: any) => (
+    //     <span>
+    //       <a onClick={() => handleEdit(record)}>Edit</a> {/*  {record.address} */}
+    //       <Divider type="vertical" />
+    //       <a onClick={() => handleDelete(record.id, 'broker')}>Delete</a>
+    //     </span>
+    //   ),
+    // },

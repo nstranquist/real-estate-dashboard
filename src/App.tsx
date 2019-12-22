@@ -73,6 +73,7 @@ const App: React.FC<IProps> = ({
         <GuestRoute exact path='/signup' component={Signup} />
         <GuestRoute exact path='/login' component={Login} />
         <GuestRoute exact path='/reset-password' component={ResetPassword} />
+        {/* Private Route: */}
         <Route path='/home' component={BaseLayout}/>
         <Route path='/' render={() => {
           if(isAuth) return <Redirect to='/home' />

@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // import components
-import { Row, Col, Button, Modal, Form, Input, Radio, Icon, Upload } from 'antd';
+import { Row, Col, Button, Modal, Form, Input, Radio, Icon, Upload, Typography } from 'antd';
 // import Upload from '../../_shared/Upload'
-import { PropertiesTable } from '../../Home/tables';
+import { PropertiesTable } from '../../Stats/tables';
 import { Property } from '../../../types'
 // import redux
 import { RootState } from '../../../store/root'
@@ -95,6 +95,9 @@ class Properties extends React.Component<IProps, any> {
 
     return (
       <>
+        <Typography.Title level={2} style={{textAlign:'center'}}>
+          Properties</Typography.Title>
+
         {/* Toolbar Row */}
         <Row type="flex" justify="center" gutter={[16,24]}>
           {/* Toolbar Row */}

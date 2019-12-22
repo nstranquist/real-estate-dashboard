@@ -12,11 +12,9 @@ import { updateInvestor, deleteInvestor } from '../../store/investors/actions'
 import { updateBroker, deleteBroker } from '../../store/brokers/actions'
 import { Property, Investor, Broker } from '../../types'
 
-// NOTE: perhaps, a way to combine all 3 fields, at least for the loading flag.
-// perhaps a home shortcut...??
 
 interface IProps {
-  properties: Property[] // TODO: make type of 'property'
+  properties: Property[]
   investors: Investor[]
   brokers: Broker[]
   propertiesLoading: boolean
@@ -70,15 +68,19 @@ const StyledFlatCard = styled(Card)`
 
 // TODO: clean up all of these prop imports (after testing is done)
 const Home: React.FC<IProps> = ({
+  // data
   properties,
   investors,
   brokers,
+  // loading flags
   propertiesLoading,
   investorsLoading,
   brokersLoading,
+  // error objects
   propertyErrors,
   investorErrors,
   brokerErrors,
+  // redux actions (CRUD)
   updateProperty,
   updateInvestor,
   updateBroker,
@@ -92,13 +94,13 @@ const Home: React.FC<IProps> = ({
     setKeyActive(key)
   }
 
-  const handleEditProperty = (property: Property, listType: string) => {
+  const handleEditProperty = (property: Property) => {
     updateProperty(property)
   }
-  const handleEditInvestor = (investor: Investor, listType: string) => {
+  const handleEditInvestor = (investor: Investor) => {
     updateInvestor(investor)
   }
-  const handleEditBroker = (broker: Broker, listType: string) => {
+  const handleEditBroker = (broker: Broker) => {
     updateBroker(broker)
   }
 
@@ -122,10 +124,11 @@ const Home: React.FC<IProps> = ({
 
   return (
     <div>
-      {/* Row with 3 cards, 1 for each of the lists */}
       {propertyErrors && <div style={{color:'red'}}>Error: {propertyErrors.message}</div>}
       {investorErrors && <div style={{color:'red'}}>Error: {investorErrors.message}</div>}
       {brokerErrors && <div style={{color:'red'}}>Error: {brokerErrors.message}</div>}
+      
+      {/* Row with 3 cards, 1 for each of the lists */}
       <Row gutter={[16, 48]}>
         <Col xs={0} sm={8}>
           <Card
@@ -169,6 +172,7 @@ const Home: React.FC<IProps> = ({
           </StyledFlatCard>
         </Col>
       </Row>
+
       {/* Row with Tabs for the 3 list types, each type containing Full-Width Table */}
       <Row>
         <Col span={24} style={{background:'white'}}>

@@ -5,6 +5,12 @@ import { Layout, Menu, Icon, Button } from 'antd'
 
 import { auth } from '../../utils/firebaseHelper'
 
+const StyledSider = styled(Layout.Sider)`
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  overflow: auto;
+`
 const LogoutBtn = styled.div`
   color: white;
   font-size: 1.3rem;
@@ -22,9 +28,15 @@ const LogoutBtn = styled.div`
     cursor: pointer;
   }
 `
-
-const { Sider } = Layout
-const { SubMenu } = Menu
+const StyledLogoLink = styled(Link)`
+  display: block;
+  margin: 5px auto;
+  padding: 5px 0;
+  color: white;
+  font-family: sans-serif;
+  font-size: 24px;
+  // background: rgba(255,255,255,.2);
+`
 
 interface IProps {
   width: number
@@ -48,7 +60,7 @@ const MySider: React.FC<IProps> = ({
   }
 
   return (
-    <Sider style={{overflow: 'auto', height: '100vh', left: 0, position:'fixed'}}
+    <StyledSider
       width={width}
       breakpoint="lg"
       collapsedWidth="0"
@@ -61,9 +73,10 @@ const MySider: React.FC<IProps> = ({
       }}
     >
       <div style={{textAlign: 'center'}}>
-        <Link to='/home' style={logoStyle}>
+        <StyledLogoLink to='/home'>
           <span style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.4)" }}>
-            {userName}</span></Link>
+            {userName}</span>
+        </StyledLogoLink>
         <Link to='/home/profile'>View Profile</Link>
       </div>
       <br />
@@ -80,7 +93,7 @@ const MySider: React.FC<IProps> = ({
           </Link>
         </Menu.Item>
 
-        <SubMenu
+        <Menu.SubMenu
           key="lists"
           title={
             <div>
@@ -104,7 +117,7 @@ const MySider: React.FC<IProps> = ({
               <span className="nav-text">Brokers</span>
             </Link>
           </Menu.Item>
-        </SubMenu>
+        </Menu.SubMenu>
         <Menu.Item key="4">
           <Link to='/home/matches'>
             <Icon type="check" />
@@ -112,9 +125,9 @@ const MySider: React.FC<IProps> = ({
           </Link>
         </Menu.Item>
         <Menu.Item key="5">
-          <Link to='/home/favorites'>
+          <Link to='/home/stats'>
             <Icon type="star" />
-            <span className="nav-text">Favorites</span>
+            <span className="nav-text">Stats</span>
           </Link>
         </Menu.Item>
       </Menu>
@@ -122,18 +135,8 @@ const MySider: React.FC<IProps> = ({
         <Button type='ghost' onClick={(e) => handleLogout(e)} style={{color:'white', display: 'block', width:'100%'}}>
           Logout</Button>
       </LogoutBtn>
-    </Sider>
+    </StyledSider>
   )
 }
 
 export default MySider
-
-const logoStyle = {
-  display: 'block',
-  margin: "5px auto",
-  padding: '5px 0',
-  color: "white",
-  fontFamily: 'sans-serif',
-  fontSize: '24px',
-  //background: "rgba(255, 255, 255, 0.2)",
-}

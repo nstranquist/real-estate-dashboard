@@ -48,7 +48,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   },
 );
 
-class Properties extends React.Component {
+class Investors extends React.Component {
   state = {
     visible: false,
   };
@@ -93,4 +93,4 @@ class Properties extends React.Component {
   }
 }
 
-export default Properties
+export default Investors

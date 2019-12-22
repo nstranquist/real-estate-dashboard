@@ -12,11 +12,13 @@ import {Home} from '../Home'
 import Brokers from '../Lists/Brokers'
 import Investors from '../Lists/Investors'
 import Properties from '../Lists/Properties'
-import Matches from '../Matches'
-import Favorites from '../Favorites'
+import { PropertyDetail } from '../MatchDetail'
+import { InvestorDetail } from '../MatchDetail'
+import { Matches } from '../Matches'
 import Profile from '../Profile/Profile'
 
 import { RootState } from '../../store/root'
+import { Stats } from '../Stats'
 
 
 interface IProps {
@@ -34,9 +36,7 @@ const StyledLayout = styled(Layout)`
   }
   
 `
-// @media(min-width: 576px) {
-//   marginLeft: 200px;
-// }
+
 const MyBaseLayout: React.FC<IProps> = ({
   userName,
   screenName,
@@ -48,17 +48,21 @@ const MyBaseLayout: React.FC<IProps> = ({
       <StyledLayout>
         {/* Page Header */}
         {/* TODO: either connect router to redux, or move this to inside the page component */}
+        {/* NOTE: connecting the router seems like the best solution */}
         <MyHeader screenName={screenName} />
         {/* Page Content View */}
         <Layout.Content style={{ margin: '24px 16px 0' }}>
           <Switch>
-            <PrivateRoute exact path='/home/brokers' component={Brokers} />
-            <PrivateRoute exact path='/home/investors' component={Investors} />
             <PrivateRoute exact path='/home/properties' component={Properties} />
+            <PrivateRoute exact path='/home/property/:id' component={PropertyDetail} />
+            <PrivateRoute exact path='/home/investors' component={Investors} />
+            <PrivateRoute exact path='/home/investors/:id' component={InvestorDetail} />
             <PrivateRoute exact path='/home/matches' component={Matches} />
-            <PrivateRoute exact path='/home/favorites' component={Favorites} />
             <PrivateRoute exact path='/home/profile' component={Profile} />
+            <PrivateRoute exact path='/home/stats' component={Stats} />
+            <PrivateRoute exact path='/home/brokers' component={Brokers} />
             <PrivateRoute exact path='/home' component={Home} />
+            {/* Private Route:(?) */}
             <Route path='/home' render={() => <Redirect to='/home' />} />
           </Switch>
         </Layout.Content>
@@ -71,6 +75,7 @@ const MyBaseLayout: React.FC<IProps> = ({
 }
 
 const mapStateToProps = (state: RootState) => ({
+  // TODO: create selector for this... getUserName()
   userName: (state.profile.userData.firstName.charAt(0) + ' ' + state.profile.userData.lastName),
   screenName: state.ui.screenName,
 })

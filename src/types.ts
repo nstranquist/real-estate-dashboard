@@ -50,6 +50,8 @@ export interface ProfileData {
 // Property Types
 export interface Property {
   id: string
+  // name: string
+  // url: string
   address: string
   price: number
   capRate: number
@@ -62,6 +64,7 @@ export interface Property {
 
 // Investor Types
 export interface Investor {
+  // location types is its own thing... lol
   id: string
   firstName: string
   lastName: string
@@ -71,13 +74,16 @@ export interface Investor {
   cellPhone: string
   address: string
   city: string
+  // anti-citys?
   state: string // 'AZ' | 'AK' | etc...
   zipcode: number
   role: 'Broker' | 'Principal'
+  // NOTE: put these together?
   priceMin: number
   priceMax: number
+  //propertyTypes: string[]
   propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'  // or string[] array??
-  regions: string[] // an array or...?
+  regions: string[]
   leaseType: 'Ground' | 'Net' | 'Absolute Net' // types needed
   propertyStatus: 'Stabilized' | 'Value-Add'
   is1031: boolean

@@ -1,4 +1,5 @@
 
+import { createSelector } from 'reselect'
 import { UserDataState, UserDataTypes } from './types'
 
 const initialUserDataState: UserDataState = {
@@ -79,4 +80,10 @@ export default (
     default:
       return state
   }
+}
+
+// LOCAL SELECTORS:
+
+export const selectUsername = (state: UserDataState) => {
+  return `${state.firstName.charAt(0)} ${state.lastName}`
 }

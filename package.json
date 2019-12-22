@@ -15,6 +15,7 @@
     "@types/react-dom": "16.9.3",
     "@types/react-redux": "^7.1.5",
     "@types/react-router-dom": "^5.1.2",
+    "@types/reselect": "^2.2.0",
     "@types/styled-components": "^4.4.0",
     "antd": "^3.25.0",
     "babel-loader": "^8.0.6",
@@ -31,6 +32,7 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "styled-components": "^4.4.1",
     "styled-theme": "^0.3.3",
     "typescript": "3.6.4"

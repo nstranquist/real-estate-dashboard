@@ -1,3 +1,10 @@
+
+
+
+// TODO: convert this component to 'TeamView' page
+
+
+
 import React from 'react'
 import { Button, Modal, Form, Input, Radio } from 'antd';
 
@@ -8,8 +15,8 @@ import { Button, Modal, Form, Input, Radio } from 'antd';
 //   onCreate(): void
 // }
 
+
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
-  // eslint-disable-next-line
   class extends React.Component {
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
@@ -48,7 +55,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   },
 );
 
-class Properties extends React.Component {
+class Brokers extends React.Component {
   state = {
     visible: false,
   };
@@ -93,4 +100,4 @@ class Properties extends React.Component {
   }
 }
 
-export default Properties
+export default Brokers

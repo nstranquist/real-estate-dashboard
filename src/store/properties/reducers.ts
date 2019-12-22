@@ -82,3 +82,8 @@ export default (
       return state
   }
 }
+
+// LOCAL SELECTORS:
+// export const selectProperty = (state: PropertiesState) => {
+
+// }
