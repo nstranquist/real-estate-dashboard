@@ -4,8 +4,8 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 // import comopnents
 import { Layout } from 'antd'
-import MyHeader from './MyHeader'
-import MySider from './MySider'
+import {MyHeader} from './MyHeader'
+import {MySider} from './MySider'
 import PrivateRoute from '../../utils/PrivateRoute'
 // import page components
 import {Home} from '../Home'
