@@ -1,42 +1,9 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Layout, Menu, Icon, Button } from 'antd'
-
+import { Menu, Icon, Button } from 'antd'
+import { StyledSider, StyledLogoutBtn, StyledLogoLink } from './layout.style'
 import { auth } from '../../utils/firebaseHelper'
 
-const StyledSider = styled(Layout.Sider)`
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  overflow: auto;
-`
-const LogoutBtn = styled.div`
-  color: white;
-  font-size: 1.3rem;
-  text-align: center;
-  width: 90%;
-  margin-left: 5%;
-  padding: 3px;
-  border-radius: 1px;
-  position: absolute;
-  bottom: 15px;
-  transition: .2s ease-in-out;
-
-  :hover {
-    transition: .2s ease-in-out;
-    cursor: pointer;
-  }
-`
-const StyledLogoLink = styled(Link)`
-  display: block;
-  margin: 5px auto;
-  padding: 5px 0;
-  color: white;
-  font-family: sans-serif;
-  font-size: 24px;
-  // background: rgba(255,255,255,.2);
-`
 
 interface IProps {
   width: number
@@ -44,7 +11,7 @@ interface IProps {
 }
 
 // TODO: make sidebar wider, responsive for tablets, better button clicker
-const MySider: React.FC<IProps> = ({
+export const MySider: React.FC<IProps> = ({
   width,
   userName
 }) => {
@@ -131,12 +98,10 @@ const MySider: React.FC<IProps> = ({
           </Link>
         </Menu.Item>
       </Menu>
-      <LogoutBtn>
+      <StyledLogoutBtn>
         <Button type='ghost' onClick={(e) => handleLogout(e)} style={{color:'white', display: 'block', width:'100%'}}>
           Logout</Button>
-      </LogoutBtn>
+      </StyledLogoutBtn>
     </StyledSider>
   )
 }
-
-export default MySider

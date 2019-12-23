@@ -18,15 +18,16 @@ const PrivateRoute: React.FC<IProps> = ({
 }) => (
   <Route
     {...rest}
-    render={props =>
+    render={routeProps =>
       isAuth ? (
-        <Component exact={exact} {...props} />
+        <Component exact={exact} {...routeProps} />
       ) : (
         <Redirect to='/login' />
       )}
   />
 )
 
+// NOTE: is this okay?
 export default connect(
   (state: RootState) => ({isAuth: state.profile.auth.isAuthenticated })
 )(PrivateRoute)

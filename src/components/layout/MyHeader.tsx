@@ -1,16 +1,41 @@
 import React from 'react'
-import { Row, PageHeader, Tabs, Button } from 'antd';
-
-const { TabPane } = Tabs;
+import { Tabs, Button } from 'antd'; // Row, Col   // for grid layout / more complex header
+import { StyledPageHeader } from './layout.style'
 
 
 interface IProps {
   screenName?: string
 }
 
-const MyHeader: React.FC<IProps> = ({
+export const MyHeader: React.FC<IProps> = ({
   screenName='Title',
 }) => {
+  
+  return (
+    <StyledPageHeader
+      onBack={() => window.history.back()}
+      title={screenName}
+      // subTitle={subtitle}
+      // breadcrumb={{ routes }}
+      extra={[
+        <Button key="3">Operation</Button>,
+        <Button key="2">Operation</Button>,
+        <Button key="1" type="primary">
+          Primary
+        </Button>,
+      ]}
+      footer={
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Details" key="1" />
+          <Tabs.TabPane tab="Rule" key="2" />
+        </Tabs>
+      }
+    >
+    </StyledPageHeader>
+  )
+}
+
+// old code:
   
   // const routes = [
   //   {
@@ -30,33 +55,3 @@ const MyHeader: React.FC<IProps> = ({
   //     breadcrumbName: 'Properties',
   //   },
   // ]
-  
-  return (
-    <PageHeader
-      style={{
-        border: '1px solid rgb(235, 237, 240)',
-        background: 'white'
-      }}
-      onBack={() => window.history.back()}
-      title={screenName}
-      // subTitle={subtitle}
-      // breadcrumb={{ routes }}
-      extra={[
-        <Button key="3">Operation</Button>,
-        <Button key="2">Operation</Button>,
-        <Button key="1" type="primary">
-          Primary
-        </Button>,
-      ]}
-      footer={
-        <Tabs defaultActiveKey="1">
-          <TabPane tab="Details" key="1" />
-          <TabPane tab="Rule" key="2" />
-        </Tabs>
-      }
-    >
-    </PageHeader>
-  )
-}
-
-export default MyHeader
