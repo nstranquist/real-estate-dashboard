@@ -7,3 +7,6 @@ This dashboard app is used for matching, filtering, sorting, entering, and uploa
 2) install all packages with `npm install`  
 3) run the project locally with `npm start`
 4) if the project is configured for deployment, run `npm deploy` or `npm run deploy` to redeploy it  
+
+### Live At:
+https://sharp-colden-afe3b6.netlify.com/

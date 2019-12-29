@@ -21,7 +21,7 @@ export const StyledLogoutBtn = styled.div`
   bottom: 15px;
   transition: .2s ease-in-out;
 
-  :hover {
+  &:hover {
     transition: .2s ease-in-out;
     cursor: pointer;
   }

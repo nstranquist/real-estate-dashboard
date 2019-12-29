@@ -89,6 +89,24 @@ export interface Investor {
   is1031: boolean
 }
 
+// NOTE: I am not too happy with this criteria, but it should do for now
+// export interface Investor {
+//   id: string
+//   firstName: string
+//   lastName: string
+//   //email: string
+//   companyName: string
+//   priceMin: number
+//   priceMax: number
+//   noiMin: number
+//   noiMax: number
+//   propertyType: 'Industrial' | 'Retail' | 'Restaurant' | 'Shopping Center' | 'Multi-Family' | 'Specialty Office' | 'Healthcare' | 'Hospitality' | 'Sports & Entertainment' | 'Land' | 'Other'
+//   builtBefore: number // aka yearMin
+//   builtAfter: number // aka yearMax
+//   state: string // 'AK' | 'AZ' | ...
+//   town: string
+// }
+
 // Broker Types
 export interface Broker {
   id: string
