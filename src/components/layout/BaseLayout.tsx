@@ -10,7 +10,7 @@ import PrivateRoute from '../../utils/PrivateRoute'
 // import page components
 import {Home} from '../Home'
 import Brokers from '../Lists/Brokers'
-import Investors from '../Lists/Investors'
+import { Investors } from '../Lists/Investors'
 import Properties from '../Lists/Properties'
 import { PropertyDetail } from '../MatchDetail'
 import { InvestorDetail } from '../MatchDetail'
@@ -62,7 +62,6 @@ const MyBaseLayout: React.FC<IProps> = ({
             <PrivateRoute exact path='/home/stats' component={Stats} />
             <PrivateRoute exact path='/home/brokers' component={Brokers} />
             <PrivateRoute exact path='/home' component={Home} />
-            {/* Private Route:(?) */}
             <Route path='/home' render={() => <Redirect to='/home' />} />
           </Switch>
         </Layout.Content>

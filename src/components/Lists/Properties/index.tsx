@@ -13,6 +13,8 @@ import { addProperty, updateProperty, deleteProperty, uploadProperties } from '.
 interface IProps {
   loading: boolean
   properties: Property[]
+  errors: any
+  filter: string
   addProperty(property: Property): void
   editProperty(property: Property): void
   deleteProperty(id: string): void
@@ -58,7 +60,6 @@ const CollectionCreateForm: any = Form.create({ name: 'form_in_modal' })(
     }
   },
 );
-
 
 
 class Properties extends React.Component<IProps, any> {

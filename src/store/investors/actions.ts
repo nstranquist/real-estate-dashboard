@@ -74,7 +74,11 @@ export const deleteInvestor = (id: string) => (dispatch: Dispatch) => {
     .catch(err => dispatch({ type: 'SET_INVESTORS_ERROR', err}))
 }
 
-// export const setInvestorsFilter = (filter: string) => ({
-//   type: 'SET_INVESTORS_FILTER',
-//   filter
-// })
+export const uploadInvestors = (data: any) => (dispatch: Dispatch) => {
+  console.log('upload investors with data:', data)
+}
+
+export const setInvestorsFilter = (filter: string) => ({
+  type: 'SET_INVESTORS_FILTER',
+  filter
+})

@@ -20,15 +20,7 @@ export const getProperties = () => (dispatch: Dispatch,  getState: any) => {
         propertyType: property.data()!.propertyType,
         yearBuilt: property.data()!.yearBuilt,
       }))
-      // then add isFavorite flag to the scholarships from userData if signedin
-      // if(getState().profile.auth.isAuthenticated) { // can probably verify here in better ways
-      //   let favoriteProperty = getState().profile.userData.myProperties
-      //   if(favoriteProperty) {
-      //     response.map(property => {
-      //       property.isFavorite = favoriteProperty.includes(property.index) ? true : false
-      //     })
-      //   } else console.log('your favorited scholarships were null')
-      // }
+      
       dispatch({
         type: 'GET_PROPERTIES',
         properties
@@ -79,3 +71,16 @@ export const setPropertiesFilter = (filter: string) => ({
   type: 'SET_PROPERTIES_FILTER',
   filter
 })
+
+// old code:
+
+// old favorite property code:
+// then add isFavorite flag to the scholarships from userData if signedin
+// if(getState().profile.auth.isAuthenticated) { // can probably verify here in better ways
+//   let favoriteProperty = getState().profile.userData.myProperties
+//   if(favoriteProperty) {
+//     response.map(property => {
+//       property.isFavorite = favoriteProperty.includes(property.index) ? true : false
+//     })
+//   } else console.log('your favorited scholarships were null')
+// 
