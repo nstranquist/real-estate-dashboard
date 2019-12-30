@@ -4,6 +4,7 @@ import { Property } from '../../types'
 const initialState: PropertiesState = {
   properties: [],
   filter: 'all',
+  params: ['price'],
   loading: false,
   errors: null
 }
@@ -60,6 +61,11 @@ export default (
           ...state.properties
         ],
         filter: action.filter
+      }
+    case 'SET_PROPERTY_MATCH':
+      return {
+        ...state,
+        params: action.params
       }
     // case 'TOGGLE_FAVORITE_PROPERTY':
     //   // find property in array by id that needs to be toggled

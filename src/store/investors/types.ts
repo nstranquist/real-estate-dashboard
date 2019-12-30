@@ -4,6 +4,7 @@ import { Investor } from '../../types'
 export interface InvestorsState {
   investors: Investor[]
   filter: string
+  params: string[]
   loading: boolean
   errors: any
 }
@@ -29,6 +30,10 @@ export interface setInvestorsFilter {
   readonly type: 'SET_INVESTORS_FILTER'
   filter: string
 }
+export interface setInvestorMatch {
+  readonly type: 'SET_INVESTOR_MATCH'
+  params: string[]
+}
 // export interface toggleFavoriteInvestor {
 //   readonly type: 'TOGGLE_FAVORITE_PROPERTY'
 //   index: number
@@ -40,6 +45,7 @@ export type InvestorActionTypes =
   | updateInvestor
   | deleteInvestor
   | setInvestorsFilter
+  | setInvestorMatch
   | { readonly type: 'SET_INVESTORS_ERROR', err: any }
   | { readonly type: 'LOADING_INVESTORS' }
   // | toggleFavoriteInvestor

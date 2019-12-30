@@ -3,6 +3,7 @@ import { InvestorsState, InvestorActionTypes } from './types'
 const initialState: InvestorsState = {
   investors: [],
   filter: 'all',
+  params: ['price'],
   loading: false,
   errors: null
 }
@@ -47,6 +48,11 @@ export default (
           ...state.investors
         ],
         filter: action.filter
+      }
+    case 'SET_INVESTOR_MATCH':
+      return {
+        ...state,
+        params: action.params
       }
     case 'SET_INVESTORS_ERROR':
       return {

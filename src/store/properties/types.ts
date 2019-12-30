@@ -4,6 +4,7 @@ import { Property } from '../../types'
 export interface PropertiesState {
   properties: Property[]
   filter: string
+  params: string[]
   loading: boolean
   errors: any
 }
@@ -30,6 +31,10 @@ export interface setPropertiesFilter {
   readonly type: 'SET_PROPERTIES_FILTER'
   filter: string
 }
+export interface setPropertiesMatch {
+  readonly type: 'SET_PROPERTY_MATCH'
+  params: string[]
+}
 
 // export interface toggleFavoriteProperty {
 //   readonly type: 'TOGGLE_FAVORITE_PROPERTY'
@@ -42,6 +47,7 @@ export type PropertyActionTypes =
   | updateProperty
   | deleteProperty
   | setPropertiesFilter
+  | setPropertiesMatch
   | { readonly type: 'SET_PROPERTIES_ERROR', err: any }
   | { readonly type: 'LOADING_PROPERTIES' }
   // | toggleFavoriteProperty

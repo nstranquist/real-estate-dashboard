@@ -7,6 +7,7 @@ import properties, * as fromProperties from './properties/reducers'
 import investors from './investors/reducers'
 import brokers from './brokers/reducers'
 import ui from './ui'
+import matching from './matching/matching'
 // import SELECTORS
 import * as fromProfile from './profileContainer/userData/reducers'
 
@@ -16,7 +17,8 @@ const rootApp = combineReducers({
   properties,
   investors,
   brokers,
-  ui
+  ui,
+  matching
 })
 
 export default rootApp
@@ -31,8 +33,6 @@ export const selectUsername = (state: RootState) => {
   console.log('username:', fromProfile.selectUsername(state.profile.userData))
   return fromProfile.selectUsername(state.profile.userData)
 }
-
-
 
 
 
