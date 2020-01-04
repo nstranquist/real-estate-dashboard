@@ -46,7 +46,13 @@ const StyledTrigger = styled(Icon)`
     &:hover {
       color: #1890ff;
     }
+
+    @media(max-width: 992px) {
+      font-size: 20px;
+    }
   }
+
+  
 `
 
 const MyBaseLayout: React.FC<IProps> = ({
