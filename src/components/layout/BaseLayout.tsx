@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 // import comopnents
-import { Layout } from 'antd'
+import { Layout, Icon } from 'antd'
 import {MyHeader} from './MyHeader'
 import {MySider} from './MySider'
 import PrivateRoute from '../../utils/PrivateRoute'
@@ -23,33 +23,55 @@ import { Stats } from '../Stats'
 
 interface IProps {
   userName: string
-  screenName: string
+  // screenName: string
 }
 
-const StyledLayout = styled(Layout)`
-  margin-left: 200px;
-  transition: .25s ease;
+// const StyledLayout = styled(Layout)`
+//   margin-left: 200px;
+//   transition: .15s ease-in-out;
 
-  @media(max-width: 992px) {
-    margin-left: 0;
-    transition: .25s ease;
+//   @media(max-width: 992px) {
+//     margin-left: 0;
+//     transition: .15s ease-in-out;
+//   }
+// `
+const StyledTrigger = styled(Icon)`
+  &.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 0;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #1890ff;
+    }
   }
-  
 `
 
 const MyBaseLayout: React.FC<IProps> = ({
   userName,
-  screenName,
+  // screenName,
 }) => {
+  const [collapsed, setCollapsed] = useState<boolean>(true)
+
+  const toggleCollapse = () => setCollapsed(!collapsed)
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       {/* Side Drawer */}
-      <MySider width={200} userName={userName} />
-      <StyledLayout>
+      <MySider userName={userName} trigger={null} collapsible collapsed={collapsed} toggleCollapse={toggleCollapse} />
+      {/* <MySider trigger={null} collapsible collapsed={collapsed} userName={userName} /> */}
+      <Layout>
         {/* Page Header */}
-        {/* TODO: either connect router to redux, or move this to inside the page component */}
-        {/* NOTE: connecting the router seems like the best solution */}
-        <MyHeader screenName={screenName} />
+        <Layout.Header style={{background:'#fff'}}>
+          <StyledTrigger
+            className="trigger"
+            type={collapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={toggleCollapse}
+          />
+        </Layout.Header>
+        {/* <MyHeader screenName={screenName} /> */}
         {/* Page Content View */}
         <Layout.Content style={{ margin: '24px 16px 0' }}>
           <Switch>
@@ -68,7 +90,7 @@ const MyBaseLayout: React.FC<IProps> = ({
         {/* Page Footer */}
         <Layout.Footer style={{ textAlign: 'center' }}>
           Jacob's Brokerage Dashboard, 2019</Layout.Footer>
-      </StyledLayout>
+      </Layout>
     </Layout>
   )
 }
@@ -76,7 +98,7 @@ const MyBaseLayout: React.FC<IProps> = ({
 const mapStateToProps = (state: RootState) => ({
   // TODO: create selector for this... getUserName()
   userName: (state.profile.userData.firstName.charAt(0) + ' ' + state.profile.userData.lastName),
-  screenName: state.ui.screenName,
+  // screenName: state.ui.screenName,
 })
 
 export const BaseLayout = connect(

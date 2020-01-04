@@ -1,25 +1,36 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Menu, Icon, Button } from 'antd'
-import { StyledSider, StyledLogoutBtn, StyledLogoLink } from './layout.style'
+import { Layout, Menu, Icon, Button } from 'antd'
+import { StyledLogoutBtn, StyledLogoLink } from './layout.style'
 import { auth } from '../../utils/firebaseHelper'
 
 
 interface IProps {
-  width: number
+  width?: number
   userName: string  // display name for top of page
+  trigger?: any
+  collapsible: boolean
+  collapsed: boolean
+  toggleCollapse(): void
 }
+
+const StyledSider = styled(Layout.Sider)`
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+`
 
 // TODO: make sidebar wider, responsive for tablets, better button clicker
 export const MySider: React.FC<IProps> = ({
   width,
-  userName
+  userName,
+  trigger,
+  collapsible,
+  collapsed,
+  toggleCollapse
 }) => {
-  const [collapsed, setCollapsed] = useState(false)
-
-  const onCollapsed = () => {
-    setCollapsed(!collapsed)
-  }
 
   const handleLogout = (e: any) => {
     e.preventDefault()
@@ -27,18 +38,25 @@ export const MySider: React.FC<IProps> = ({
   }
 
   return (
-    <StyledSider
-      width={width}
+    <Layout.Sider
+      // width={width}
       breakpoint="lg"
       collapsedWidth="0"
+      collapsed={collapsed}
+      trigger={trigger}
       onBreakpoint={broken => {
-        console.log(broken);
+        console.log('broken:', broken);
       }}
       onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-        onCollapsed()
+        console.log('collapsed:', collapsed, 'type:', type);
+        toggleCollapse()
       }}
     >
+    {/* <Layout.Sider
+      trigger={trigger}
+      collapsible={collapsible}
+      collapsed={collapsed}
+    > */}
       <div style={{textAlign: 'center'}}>
         <StyledLogoLink to='/home'>
           <span style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.4)" }}>
@@ -102,6 +120,6 @@ export const MySider: React.FC<IProps> = ({
         <Button type='ghost' onClick={(e) => handleLogout(e)} style={{color:'white', display: 'block', width:'100%'}}>
           Logout</Button>
       </StyledLogoutBtn>
-    </StyledSider>
+    </Layout.Sider>
   )
 }

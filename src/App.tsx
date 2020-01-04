@@ -90,8 +90,15 @@ const mapStateToProps = (state: RootState) => ({
 
 export default connect(
   mapStateToProps,
-  { getUserData, getUserProfileData, authenticateUser, logout,
-    getProperties, getInvestors, getBrokers }
+  {
+    getUserData,
+    getUserProfileData,
+    authenticateUser,
+    logout,
+    getProperties,
+    getInvestors,
+    getBrokers,
+  }
 )(App)
 
 // const contentStyle = {

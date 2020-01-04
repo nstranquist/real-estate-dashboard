@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import { Layout, PageHeader } from 'antd'
 
 // sider styled components
-export const StyledSider = styled(Layout.Sider)`
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  overflow: auto;
-`
+// export const StyledSider = styled(Layout.Sider)`
+//   height: 100vh;
+//   left: 0;
+//   position: fixed;
+//   overflow: auto;
+// `
 export const StyledLogoutBtn = styled.div`
   color: white;
   font-size: 1.3rem;
