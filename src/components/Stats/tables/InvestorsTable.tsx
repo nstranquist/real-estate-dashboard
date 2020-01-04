@@ -68,47 +68,16 @@ export const InvestorsTable: React.FC<IProps> = ({
       dataIndex:'companyName',
       key:'companyName',
     },
-    {
-      title: 'Office Phone',
-      dataIndex:'officePhone',
-      key:'officePhone',
-    },
-    {
-      title: 'Cell Phone',
-      dataIndex:'cellPhone',
-      key:'cellPhone',
-    },
-    {
-      title: 'Address',
-      dataIndex:'address',
-      key:'address',
-    },
-    {
-      title: 'City',
-      dataIndex:'city',
-      key:'city',
-    },
-    {
-      title: 'State',
-      dataIndex:'state',
-      key:'state',
-    },
-    {
-      title: 'Zip Code',
-      dataIndex:'zipcode',
-      key:'zipcode',
-    },
-    {
-      title: 'Role',
-      dataIndex:'role',
-      key:'role',
-      render: (text: string) => (
-        <select value={text}>
-          <option value="Broker">Broker</option>
-          <option value="Principal">Principal</option>
-        </select>
-      )
-    },
+    // {
+    //   title: 'Cell Phone',
+    //   dataIndex:'cellPhone',
+    //   key:'cellPhone',
+    // },
+    // {
+    //   title: 'Address',
+    //   dataIndex:'address',
+    //   key:'address',
+    // },
     {
       title: 'Price Min',
       dataIndex:'priceMin',
@@ -121,9 +90,9 @@ export const InvestorsTable: React.FC<IProps> = ({
       key:'priceMax',
     },
     {
-      title: 'Property Type',
-      dataIndex:'propertyType',
-      key:'propertyType',
+      title: 'Property Types',
+      dataIndex:'propertyTypes',
+      key:'propertyTypes',
       render: (text: string) => (
         <select value={text}>
           <option value="Hospitality">Hospitality</option>
@@ -138,47 +107,18 @@ export const InvestorsTable: React.FC<IProps> = ({
       )
     },
     {
-      title: 'Region',
-      dataIndex:'region',
-      key:'region',
-      render: (text: string) => (
-        <select value={text}>
-          <option value="Midwest">Midwest</option>
-          <option value="Northeast">Northeast</option>
-          <option value="Southeast">Southeast</option>
-          <option value="Southwest">Southwest</option>
-          <option value="West">West</option>
-        </select>
-      )
-    },
-    {
-      title: 'Lease Type',
-      dataIndex:'leaseType',
-      key:'leaseType',
-      render: (text: string) => (
-        <select value={text}>
-          <option value="Ground">Ground</option>
-          <option value="Net">Net</option>
-          <option value="Absoluet Net">Absoluet Net</option>
-        </select>
-      )
-    },
-    {
-      title: 'Property Status',
-      dataIndex:'propertyStatus',
-      key:'propertyStatus',
-      render: (text: string) => (
-        <select value={text}>
-          <option value="Stabilized">Stabilized</option>
-          <option value="Value-Add">Value-Add</option>
-        </select>
-      )
-    },
-    {
-      title: '1031?',
-      dataIndex:'is1031',
-      key:'is1031',
-      render: (is1031: boolean) => is1031 ? <span>yes</span> : <span>no</span>
+      title: 'Cities',
+      dataIndex:'cities',
+      key:'cities',
+      // render: (text: string) => (
+      //   <select value={text}>
+      //     <option value="Midwest">Midwest</option>
+      //     <option value="Northeast">Northeast</option>
+      //     <option value="Southeast">Southeast</option>
+      //     <option value="Southwest">Southwest</option>
+      //     <option value="West">West</option>
+      //   </select>
+      // )
     },
     {
       title: 'Action',
@@ -215,3 +155,151 @@ export const InvestorsTable: React.FC<IProps> = ({
   //       </Popconfirm>
   //     ) : null,
   // },
+
+// old columns:
+// const columns = [
+//   {
+//     title: 'First Name',
+//     dataIndex:'firstName',
+//     key:'firstName',
+//   },
+//   {
+//     title: 'Last Name',
+//     dataIndex:'lastName',
+//     key:'lastName',
+//   },
+//   {
+//     title: 'Email',
+//     dataIndex:'email',
+//     key:'email',
+//     render: (email: string) => <a>{email}</a>
+//   },
+//   {
+//     title: 'Company Name',
+//     dataIndex:'companyName',
+//     key:'companyName',
+//   },
+//   {
+//     title: 'Office Phone',
+//     dataIndex:'officePhone',
+//     key:'officePhone',
+//   },
+//   {
+//     title: 'Cell Phone',
+//     dataIndex:'cellPhone',
+//     key:'cellPhone',
+//   },
+//   {
+//     title: 'Address',
+//     dataIndex:'address',
+//     key:'address',
+//   },
+//   {
+//     title: 'City',
+//     dataIndex:'city',
+//     key:'city',
+//   },
+//   {
+//     title: 'State',
+//     dataIndex:'state',
+//     key:'state',
+//   },
+//   {
+//     title: 'Zip Code',
+//     dataIndex:'zipcode',
+//     key:'zipcode',
+//   },
+//   {
+//     title: 'Role',
+//     dataIndex:'role',
+//     key:'role',
+//     render: (text: string) => (
+//       <select value={text}>
+//         <option value="Broker">Broker</option>
+//         <option value="Principal">Principal</option>
+//       </select>
+//     )
+//   },
+//   {
+//     title: 'Price Min',
+//     dataIndex:'priceMin',
+//     key:'priceMin',
+//     // render: (price: number) => 
+//   },
+//   {
+//     title: 'Price Max',
+//     dataIndex:'priceMax',
+//     key:'priceMax',
+//   },
+//   {
+//     title: 'Property Type',
+//     dataIndex:'propertyType',
+//     key:'propertyType',
+//     render: (text: string) => (
+//       <select value={text}>
+//         <option value="Hospitality">Hospitality</option>
+//         <option value="Industrial">Industrial</option>
+//         <option value="Land">Land</option>
+//         <option value="Medical">Medical</option>
+//         <option value="Multi-Family">Multi-Family</option>
+//         <option value="Office">Office</option>
+//         <option value="Other">Other</option>
+//         <option value="Retail">Retail</option>
+//       </select>
+//     )
+//   },
+//   {
+//     title: 'Region',
+//     dataIndex:'region',
+//     key:'region',
+//     render: (text: string) => (
+//       <select value={text}>
+//         <option value="Midwest">Midwest</option>
+//         <option value="Northeast">Northeast</option>
+//         <option value="Southeast">Southeast</option>
+//         <option value="Southwest">Southwest</option>
+//         <option value="West">West</option>
+//       </select>
+//     )
+//   },
+//   {
+//     title: 'Lease Type',
+//     dataIndex:'leaseType',
+//     key:'leaseType',
+//     render: (text: string) => (
+//       <select value={text}>
+//         <option value="Ground">Ground</option>
+//         <option value="Net">Net</option>
+//         <option value="Absoluet Net">Absoluet Net</option>
+//       </select>
+//     )
+//   },
+//   {
+//     title: 'Property Status',
+//     dataIndex:'propertyStatus',
+//     key:'propertyStatus',
+//     render: (text: string) => (
+//       <select value={text}>
+//         <option value="Stabilized">Stabilized</option>
+//         <option value="Value-Add">Value-Add</option>
+//       </select>
+//     )
+//   },
+//   {
+//     title: '1031?',
+//     dataIndex:'is1031',
+//     key:'is1031',
+//     render: (is1031: boolean) => is1031 ? <span>yes</span> : <span>no</span>
+//   },
+//   {
+//     title: 'Action',
+//     key: 'action',
+//     render: (text: string, record: any) => (
+//       <span>
+//         <a onClick={() => handleEdit(record)}>Edit</a> {/*  {record.address} */}
+//         <Divider type="vertical" />
+//         <a onClick={() => handleDelete(record.id, 'investor')}>Delete</a>
+//       </span>
+//     ),
+//   },
+// ]

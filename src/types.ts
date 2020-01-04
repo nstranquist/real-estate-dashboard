@@ -63,49 +63,49 @@ export interface Property {
 
 
 // Investor Types
-export interface Investor {
-  // location types is its own thing... lol
-  id: string
-  firstName: string
-  lastName: string
-  email: string
-  companyName: string
-  officePhone: string
-  cellPhone: string
-  address: string
-  city: string
-  // anti-citys?
-  state: string // 'AZ' | 'AK' | etc...
-  zipcode: number
-  role: 'Broker' | 'Principal'
-  // NOTE: put these together?
-  priceMin: number
-  priceMax: number
-  //propertyTypes: string[]
-  propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'  // or string[] array??
-  regions: string[]
-  leaseType: 'Ground' | 'Net' | 'Absolute Net' // types needed
-  propertyStatus: 'Stabilized' | 'Value-Add'
-  is1031: boolean
-}
-
-// NOTE: I am not too happy with this criteria, but it should do for now
 // export interface Investor {
+//   // location types is its own thing... lol
 //   id: string
 //   firstName: string
 //   lastName: string
-//   //email: string
+//   email: string
 //   companyName: string
+//   officePhone: string
+//   cellPhone: string
+//   address: string
+//   city: string
+//   // anti-citys?
+//   state: string // 'AZ' | 'AK' | etc...
+//   zipcode: number
+//   role: 'Broker' | 'Principal'
+//   // NOTE: put these together?
 //   priceMin: number
 //   priceMax: number
-//   noiMin: number
-//   noiMax: number
-//   propertyType: 'Industrial' | 'Retail' | 'Restaurant' | 'Shopping Center' | 'Multi-Family' | 'Specialty Office' | 'Healthcare' | 'Hospitality' | 'Sports & Entertainment' | 'Land' | 'Other'
-//   builtBefore: number // aka yearMin
-//   builtAfter: number // aka yearMax
-//   state: string // 'AK' | 'AZ' | ...
-//   town: string
+//   //propertyTypes: string[]
+//   propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'  // or string[] array??
+//   regions: string[]
+//   leaseType: 'Ground' | 'Net' | 'Absolute Net' // types needed
+//   propertyStatus: 'Stabilized' | 'Value-Add'
+//   is1031: boolean
 // }
+
+// NOTE: I am not too happy with this criteria, but it should do for now
+export interface Investor {
+  id: string
+  firstName: string
+  lastName: string
+  //email: string
+  companyName: string
+  priceMin: number
+  priceMax: number
+  noiMin: number
+  noiMax: number
+  propertyTypes: string[] //'Industrial' | 'Retail' | 'Restaurant' | 'Shopping Center' | 'Multi-Family' | 'Specialty Office' | 'Healthcare' | 'Hospitality' | 'Sports & Entertainment' | 'Land' | 'Other'
+  builtBefore: number // aka yearMin
+  builtAfter: number // aka yearMax
+  states: string[] // 'AK' | 'AZ' | ...
+  cities: string[]
+}
 
 // Broker Types
 export interface Broker {
