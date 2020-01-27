@@ -168,6 +168,10 @@ const InvestorsUI: React.FC<IProps> = ({
       {/* Investors Table View Row */}
       <Row gutter={[16,24]}>
         <Col span={24}>
+          <Typography.Paragraph>
+            Showing 10 of {investors.length} investor results</Typography.Paragraph>
+        </Col>
+        <Col span={24}>
           <InvestorsTable
             loading={loading}
             investorsData={investors}

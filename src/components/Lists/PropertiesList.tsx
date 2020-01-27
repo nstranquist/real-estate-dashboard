@@ -146,6 +146,10 @@ const PropertiesUI: React.FC<IProps> = ({
       {/* Properties Table View Row */}
       <Row gutter={[16,24]}>
         <Col span={24}>
+          <Typography.Paragraph>
+            Showing 10 of {properties.length} property results</Typography.Paragraph>
+        </Col>
+        <Col span={24}>
           <PropertiesTable
             loading={loading}
             propertiesData={properties}

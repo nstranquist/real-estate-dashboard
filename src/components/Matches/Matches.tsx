@@ -121,7 +121,7 @@ const MatchesView: React.FC<IProps> = ({
           Showing {hideUnmatched ? matchCount : matches.length} matched properties
         </Typography.Paragraph>
       ) : (
-        <Typography.Paragraph>Click "Get Matches" to see all property matches</Typography.Paragraph>
+        <Typography.Paragraph style={{textAlign:'center', padding:20,margin:10}}>Click "Get Matches" to see all property matches</Typography.Paragraph>
       )}
       <Row gutter={[16,16]}>
         {matches.map((matchItem: IMatchItem, index: number) => {
