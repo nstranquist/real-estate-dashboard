@@ -16,7 +16,7 @@ export const InvestorsTable: React.FC<IProps> = ({
   handleEdit,
   handleDelete
 }) => {
-  
+
   const columns = [
     {
       title: 'Action',

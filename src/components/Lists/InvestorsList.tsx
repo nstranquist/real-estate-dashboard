@@ -128,6 +128,15 @@ const InvestorsUI: React.FC<IProps> = ({
 
   const resetForm = () => setFormData(emptyForm)
 
+  const handleUpdateInvestor = (data: any) => {
+    console.log('updating investor with id:', data.id)
+    // either set editing or make the table row become editable
+  }
+  const handleDeleteInvestor = (id: string) => {
+    console.log('deleting investor with id:', id)
+    deleteInvestor(id)
+  }
+
   return (
     <>
       <Typography.Title level={2} style={{textAlign:'center'}}>
@@ -162,8 +171,8 @@ const InvestorsUI: React.FC<IProps> = ({
           <InvestorsTable
             loading={loading}
             investorsData={investors}
-            handleEdit={updateInvestor}
-            handleDelete={deleteInvestor}
+            handleEdit={handleUpdateInvestor}
+            handleDelete={handleDeleteInvestor}
           />
         </Col>
       </Row>
