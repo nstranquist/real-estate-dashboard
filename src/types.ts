@@ -49,7 +49,7 @@ export interface ProfileData {
 
 // Property Types
 export interface Property {
-  id: string
+  id?: string
   name: string
   // url: string
   propertyType: string // 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'
@@ -69,7 +69,7 @@ export interface Property {
 }
 
 export interface Investor {
-  id: string
+  id?: string
   firstName: string
   lastName: string
   companyName: string

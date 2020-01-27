@@ -1,19 +1,11 @@
 import { RootState } from "./root";
 import { Property, Investor } from "../types";
 
+// Types for MatchedItems (TODO: move to 'types.ts')
 export interface MatchedItem {
   id: string
   name: string
-  // could add extra params here (only the ones being matched with)
 }
-
-// export interface MatchedProperties {
-//   properties: MatchedProperties[]
-// }
-// export interface MatchedInvestors {
-//   investors: MatchedInvestors[]
-// }
-
 export interface MatchedProperty extends Property {
   investors: MatchedItem[]  // array of investor ids with name snippet
 }
@@ -21,9 +13,13 @@ export interface MatchedInvestor extends Investor {
   properties: MatchedItem[]
 }
 
-// put matched and favorite selectors here
+// Selectors
+export const selectInvestorsByState = (state: RootState) => {
+  // use state in rootstate for this
+  
+}
 
-// currently working for price only
+
 export const getMatchedProperties = (state: RootState) => {
   console.log('called getMatchedProperties with params:', state.matching.params)
   let matchedProperties: MatchedProperty[] = []
@@ -36,7 +32,7 @@ export const getMatchedProperties = (state: RootState) => {
     state.investors.investors.forEach(investor => {
       if(property.price >= investor.priceMin && property.price <= investor.priceMax) {
         // then investor matches property on price, we want to attach investor id and name to property
-        newProperty.investors.push({id: investor.id, name: `${investor.firstName} ${investor.lastName}`})
+        newProperty.investors.push({id: investor.id!, name: `${investor.firstName} ${investor.lastName}`})
         console.log('new property:', newProperty)
       }
     })

@@ -53,6 +53,7 @@ const CollectionCreateForm: any = Form.create({ name: 'form_in_modal' })(
                   <Radio value="retail">Retail</Radio>
                 </Radio.Group>,
               )}
+              <Button type="primary" htmlType="submit">Add Property</Button>
             </Form.Item>
           </Form>
         </Modal>
@@ -133,12 +134,12 @@ class Properties extends React.Component<IProps, any> {
             />
           </Col>
         </Row>
-        <CollectionCreateForm
+        {/* <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
-        />
+        /> */}
       </>
     );
   }

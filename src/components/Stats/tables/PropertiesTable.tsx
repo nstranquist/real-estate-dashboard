@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 // import styled from 'styled-components'
 import { Table } from 'antd'
 import { Property } from '../../../types'
@@ -29,31 +30,83 @@ export const PropertiesTable: React.FC<IProps> = ({
 
   const columns = [
     {
+      title: 'Name',
+      dataIndex:'name',
+      key:'name',
+      width:150,
+      // ellipses: true,
+      render: (text: string, record: any) => <Link to={`/home/properties/${record.id}`}>{text}</Link>,
+    },
+    {
       title: 'Address',
       dataIndex:'address',
       key:'address',
-      width: 190,
-      render: (text: string) => <a>{text}</a>,
+      width: 180,
+      render: (text: string, record: any) => <Link to={`/home/properties/${record.id}`}>{text}</Link>,
     },
     {
       title: 'Price',
       dataIndex:'price',
       key:'price',
-      width: 85,
+      width: 125,
+      render: (value: any) => <span>{`${value}`}</span>,
+    },
+    {
+      title: 'SqFt',
+      dataIndex:'SqFt',
+      key:'SqFt',
+      width: 125,
+      render: (value: any) => <span>{value}</span>,
+    },
+    {
+      title: '$/SqFt',
+      dataIndex:'dollarPerSF',
+      key:'dollarPerSF',
+      width: 125,
+      render: (value: any) => <span>{`${value}`}</span>,
+    },
+    {
+      title: 'City',
+      dataIndex:'city',
+      key:'city',
+      width: 100,
+      ellipses: true,
+      render: (text: string) => <span>{text}</span>,
+    },
+    {
+      title: 'State',
+      dataIndex:'state',
+      key:'state',
+      width: 100,
+      render: (text: string) => <span>{text}</span>,
+    },
+    {
+      title: 'Tenancy',
+      dataIndex:'tenancy',
+      key:'tenancy',
+      width: 100,
+      render: (text: string) => <span>{text}</span>,
+    },
+    {
+      title: 'Lease Term',
+      dataIndex:'leaseTerm',
+      key:'leaseTerm',
+      width: 125,
+      render: (value: any) => <span>{value}</span>,
     },
     {
       title: 'Cap Rate',
       dataIndex:'capRate',
       key:'capRate',
       width: 95,
-      render: (value: number) => <span>{`${value}%`}</span>
+      render: (value: number) => <span>{`${value}`}</span>
     },
     {
       title: 'NOI',
       dataIndex:'noi',
       key:'noi',
-      width: 85,
-      render: (value: number) => <span>{`$${value}`}</span>
+      width: 100,
+      render: (value: number) => <span>{`${value}`}</span>
     },
     {
       title: 'Property Type',

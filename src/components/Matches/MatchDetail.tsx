@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const PropertyDetail = () => {
+export const MatchDetail = () => {
   return (
     <div>
-      Property Detail
+      Match Detail (l/r)
     </div>
   )
 }

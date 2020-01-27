@@ -59,7 +59,7 @@ export const getProperties = () => (dispatch: Dispatch,  getState: any) => {
     .then((snap) => {
       let properties: Property[] = snap.docs.map(property => ({
         id: property.id,
-        name: property.data()!.name,
+        name: property.data()!.propertyName,
         propertyType: property.data()!.propType,
         address: property.data()!.address,
         city: property.data()!.city,
@@ -154,7 +154,7 @@ export const getAllProperties = () => (dispatch: Dispatch,  getState: any) => {
     .then((snap) => {
       let properties: Property[] = snap.docs.map(property => ({
         id: property.id,
-        name: property.data()!.name,
+        name: property.data()!.propertyName,
         propertyType: property.data()!.propType,
         address: property.data()!.address,
         city: property.data()!.city,
