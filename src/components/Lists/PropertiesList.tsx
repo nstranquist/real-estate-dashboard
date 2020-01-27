@@ -169,7 +169,7 @@ const PropertiesUI: React.FC<IProps> = ({
       >
         <Form layout="vertical" onSubmit={handleSubmit}>
           <Form.Item label="Name">
-            <Input type="text" name="name" required value={formData.name} onChange={handleChange} />
+            <Input type="text" name="name" required autoFocus value={formData.name} onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Address">
             <Input type="text" name="address" value={formData.address} onChange={handleChange} />
