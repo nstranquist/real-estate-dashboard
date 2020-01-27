@@ -3,8 +3,8 @@
 import { combineReducers } from 'redux'
 // reducers
 import profileReducer from './profileContainer'
-import properties, * as fromProperties from './properties/reducers'
-import investors from './investors/reducers'
+import properties from './properties'
+import investors from './investors'
 import brokers from './brokers/reducers'
 import ui from './ui'
 import matching from './matching/matching'

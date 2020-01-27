@@ -1,36 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Table, Divider } from 'antd'
 import { Investor } from '../../../types'
-
-// const data: Investor[] = [
-//   {
-//     id: '1',
-//     address: '1238 Tamm Ave.',
-//     price: 310000, // TODO: format prices from number to string
-//     capRate: 18,
-//     noi: 30000, // TODO: format this too
-//     propertyType: 'Multi-Family',
-//     yearBuilt: 1896
-//   },
-//   {
-//     id: '2',
-//     address: '2111 White Lane Dr.',
-//     price: 580000,
-//     capRate: 12,
-//     noi: 25000,
-//     propertyType: 'Retail',
-//     yearBuilt: 1980
-//   },
-//   {
-//     id: '3',
-//     address: '13001 King Arthur Ln.',
-//     price: 240000,
-//     capRate: 8,
-//     noi: 10000,
-//     propertyType: 'Retail',
-//     yearBuilt: 1986
-//   },
-// ]
 
 interface IProps {
   loading: boolean
@@ -45,54 +16,129 @@ export const InvestorsTable: React.FC<IProps> = ({
   handleEdit,
   handleDelete
 }) => {
-  
+
   const columns = [
+    {
+      title: 'Action',
+      key: 'action',
+      width: 130,
+      render: (text: string, record: any) => (
+        <span>
+          <a onClick={() => handleEdit(record)}>Edit</a> {/*  {record.address} */}
+          <Divider type="vertical" />
+          <a onClick={() => handleDelete(record.id, 'investor')}>Delete</a>
+        </span>
+      ),
+    },
     {
       title: 'First Name',
       dataIndex:'firstName',
       key:'firstName',
+      width: 115,
+      render: (text: string, record:any) => <Link to={`/home/investors/${record.id}`}>{text}</Link>
     },
     {
       title: 'Last Name',
       dataIndex:'lastName',
       key:'lastName',
+      width: 115,
+      render: (text: string, record:any) => <Link to={`/home/investors/${record.id}`}>{text}</Link>
+    },
+    {
+      title: 'Company',
+      dataIndex:'companyName',
+      key:'companyName',
+      width: 115,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
     },
     {
       title: 'Email',
       dataIndex:'email',
       key:'email',
-      render: (email: string) => <a>{email}</a>
+      width: 100,
+      ellipse: true,
+      render: (text: string, record:any) => <Link to={`/home/investors/${record.id}`}>{text && text.length > 0 ? text : '(no data)'}</Link>
     },
     {
-      title: 'Company Name',
-      dataIndex:'companyName',
-      key:'companyName',
+      title: 'phone',
+      dataIndex:'phone',
+      key:'phone',
+      width: 140,
+      render: (text: string, record:any) => <Link to={`/home/investors/${record.id}`}>{text && text.length > 0 ? text : '(no-data)'}</Link>
     },
-    // {
-    //   title: 'Cell Phone',
-    //   dataIndex:'cellPhone',
-    //   key:'cellPhone',
-    // },
-    // {
-    //   title: 'Address',
-    //   dataIndex:'address',
-    //   key:'address',
-    // },
+    {
+      title: 'statePreferred',
+      dataIndex:'statePreferred',
+      key:'statePreferred',
+      width: 100,
+      ellipse: true,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
+    {
+      title: 'sfMin',
+      dataIndex:'sfMin',
+      key:'sfMin',
+      width: 115,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
+    {
+      title: '$/SF',
+      dataIndex:'dollarPerSF',
+      key:'dollarPerSF',
+      width: 115,
+      ellipse: true,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
     {
       title: 'Price Min',
       dataIndex:'priceMin',
       key:'priceMin',
-      // render: (price: number) => 
+      width: 120,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
     },
     {
       title: 'Price Max',
       dataIndex:'priceMax',
       key:'priceMax',
+      width: 130,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
+    {
+      title: 'NOI Min',
+      dataIndex:'noiMin',
+      key:'noiMin',
+      width: 100,
+      ellipse: true,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
+    {
+      title: 'NOI Max',
+      dataIndex:'noiMax',
+      key:'noiMax',
+      width: 100,
+      ellipse: true,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
+    {
+      title: 'Built Before',
+      dataIndex:'builtBefore',
+      key:'builtBefore',
+      width: 100,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
+    },
+    {
+      title: 'Built After',
+      dataIndex:'builtAfter',
+      key:'builtAfter',
+      width: 100,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
     },
     {
       title: 'Property Types',
       dataIndex:'propertyTypes',
       key:'propertyTypes',
+      width: 200,
+      ellipse: true,
       render: (text: string) => (
         <select value={text}>
           <option value="Hospitality">Hospitality</option>
@@ -107,36 +153,21 @@ export const InvestorsTable: React.FC<IProps> = ({
       )
     },
     {
-      title: 'Cities',
-      dataIndex:'cities',
-      key:'cities',
-      // render: (text: string) => (
-      //   <select value={text}>
-      //     <option value="Midwest">Midwest</option>
-      //     <option value="Northeast">Northeast</option>
-      //     <option value="Southeast">Southeast</option>
-      //     <option value="Southwest">Southwest</option>
-      //     <option value="West">West</option>
-      //   </select>
-      // )
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text: string, record: any) => (
-        <span>
-          <a onClick={() => handleEdit(record)}>Edit</a> {/*  {record.address} */}
-          <Divider type="vertical" />
-          <a onClick={() => handleDelete(record.id, 'investor')}>Delete</a>
-        </span>
-      ),
+      title: 'occupancyMin',
+      dataIndex:'occupancyMin',
+      key:'occupancyMin',
+      width: 115,
+      render: (value: any) => <span>{value && value.length > 0 ? value : '(no-data)'}</span>
     },
   ]
 
+  //const rowSelection = { onChange: () => {  }, getCheckboxProps: () => {  } }
+
   return (
     <Table
+      //rowSelection={rowSelection}
       rowKey='id'
-      scroll={{x:'1500px'}}
+      scroll={{x:'800px'}}
       loading={loading}
       columns={columns}
       dataSource={investorsData}

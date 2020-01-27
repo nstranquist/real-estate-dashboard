@@ -6,7 +6,7 @@ import CollectionCreateForm from './AddModal'
 import { InvestorsTable } from '../../Stats/tables'
 import { Investor } from '../../../types'
 // import redux
-import { addInvestor, updateInvestor, deleteInvestor, uploadInvestors } from '../../../store/investors/actions'
+import { addInvestor, updateInvestor, deleteInvestor, uploadInvestors } from '../../../store/investors'
 import { RootState } from '../../../store/root';
 
 interface IProps {

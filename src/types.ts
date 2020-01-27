@@ -49,19 +49,61 @@ export interface ProfileData {
 
 // Property Types
 export interface Property {
-  id: string
-  // name: string
+  id?: string
+  name: string
   // url: string
+  propertyType: string // 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'
   address: string
-  price: number
-  capRate: number
+  city: string
+  state: string
+  tenancy: string
+  leaseTerm: number | string // just for details only
+  termRemaining: number | string // just for details only
+  SqFt: number
+  dollarPerSF: number
   noi: number
-  propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'
-  yearBuilt: number
-  // isFavorite?: boolean
+  capRate: number
+  price: number
+  yearBuilt: number // note: missing in property database!
+  occupancy: number // note: missing in property database!
 }
 
+export interface Investor {
+  id?: string
+  firstName: string
+  lastName: string
+  companyName: string
+  email?: string
+  phone?: string
+  priceMin: number
+  priceMax: number
+  noiMin: number
+  noiMax: number
+  propertyTypes: string[] //'Industrial' | 'Retail' | 'Restaurant' | 'Shopping Center' | 'Multi-Family' | 'Specialty Office' | 'Healthcare' | 'Hospitality' | 'Sports & Entertainment' | 'Land' | 'Other'
+  builtBefore: number // aka yearMin
+  builtAfter: number // aka yearMax
+  statePreferred: string // 'AK' | 'AZ' | ...
+  occupancyMin: number
+  sfMin: number
+  dollarPerSF: number
+}
 
+// Broker Types
+export interface Broker {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  officePhone: string
+  cellPhone: string
+  companyName: string
+  propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'
+  city: string
+  state: string // 'MO' ex.
+  type: 'Sales' | 'Leasing' | 'Both'
+}
+
+// Old Code
 // Investor Types
 // export interface Investor {
 //   // location types is its own thing... lol
@@ -88,36 +130,3 @@ export interface Property {
 //   propertyStatus: 'Stabilized' | 'Value-Add'
 //   is1031: boolean
 // }
-
-// NOTE: I am not too happy with this criteria, but it should do for now
-export interface Investor {
-  id: string
-  firstName: string
-  lastName: string
-  //email: string
-  companyName: string
-  priceMin: number
-  priceMax: number
-  noiMin: number
-  noiMax: number
-  propertyTypes: string[] //'Industrial' | 'Retail' | 'Restaurant' | 'Shopping Center' | 'Multi-Family' | 'Specialty Office' | 'Healthcare' | 'Hospitality' | 'Sports & Entertainment' | 'Land' | 'Other'
-  builtBefore: number // aka yearMin
-  builtAfter: number // aka yearMax
-  states: string[] // 'AK' | 'AZ' | ...
-  cities: string[]
-}
-
-// Broker Types
-export interface Broker {
-  id: string
-  firstName: string
-  lastName: string
-  email: string
-  officePhone: string
-  cellPhone: string
-  companyName: string
-  propertyType: 'Hospitality' | 'Industrial' | 'Land' | 'Medical' | 'Multi-Family' | 'Office' | 'Other' | 'Retail'
-  city: string
-  state: string // 'MO' ex.
-  type: 'Sales' | 'Leasing' | 'Both'
-}

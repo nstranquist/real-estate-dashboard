@@ -1,5 +1,7 @@
 import { Matches } from './Matches'
+import { MatchDetail } from './MatchDetail'
 
 export {
-  Matches
+  Matches,
+  MatchDetail
 }
