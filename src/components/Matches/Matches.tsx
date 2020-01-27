@@ -24,7 +24,7 @@ const MatchesView: React.FC<IProps> = ({
   // matches
 }) => {
   const [matches, setMatches] = useState<any>([])
-  const [params, setParams] = useState<any>(["price"]) // must be spelled exactly
+  const [params, setParams] = useState<string[]>(["price"]) // must be spelled exactly
   const [hideUnmatched, setHideUnmatched] = useState<boolean>(false)
   const [matchesActive, setMatchesActive] = useState<boolean>(false) // false only at startup
 
@@ -35,16 +35,18 @@ const MatchesView: React.FC<IProps> = ({
     setHideUnmatched(e.target.checked)
   }
 
-  const handleParamsChange = (value: any, addOrSub: string) => {
-    if(addOrSub==='add'){
-      // add value to array
-      setParams({
-        ...params,
-        value
-      })
-    }
-    else if(addOrSub==='sub') {
-      setParams(params.filter((param: string) => param !== value))
+  const handleParamsChange = (e: any) => {
+    if(e.target.name==='price'){
+      if(params.includes("price")) {
+        // remove value from array
+        setParams(params.filter((param: string) => param!=="price"))
+      }
+      else {
+        // add value to array
+        let newParams = [...params]
+        newParams.push("price")
+        setParams(newParams)
+      }
     }
   }
 
@@ -57,13 +59,9 @@ const MatchesView: React.FC<IProps> = ({
       for(let i=0; i<params.length; i++) {
         let param = params[i]
         console.log('adding with param:', param)
+        // filter through investors for param, concat to matchedInvestors
         let tempInvestors = findInvestorsWithParam(param, property)
         console.log(param, ' returned investors array:', tempInvestors)
-        // filter through investors for param, concat to matchedInvestors
-        // let tempInvestors = investors.map((investor, index) => {
-          //   if(investor)
-          // })
-          // check if investor already found in investors before adding
         if(tempInvestors.length > 0)
           //@ts-ignore
           matchedInvestors.concat(tempInvestors)
@@ -107,12 +105,16 @@ const MatchesView: React.FC<IProps> = ({
     <div>
       <Typography.Title level={3} style={{textAlign:'center'}}>
         Matches</Typography.Title>
+      <Typography.Paragraph style={{textAlign:'center'}}>
+        <span>Showing matches for: </span>
+        <div>Price: <Checkbox checked={params.includes('price')} onChange={handleParamsChange} name="price" /></div>
+      </Typography.Paragraph>
       <Button type="primary" onClick={getMatches}>Get Matches</Button>
       <div style={{margin:5}}>
-        <Typography.Paragraph>
-          Hide Unmatched Properties? 
+        {/* <Typography.Paragraph> */}
+          <span onClick={() => setHideUnmatched(!hideUnmatched)}>Hide Unmatched Properties? </span>
           <Checkbox checked={hideUnmatched} onChange={handleCheckChange} />
-        </Typography.Paragraph>
+        {/* </Typography.Paragraph> */}
       </div>
       {matchesActive ? (
         <Typography.Paragraph>
