@@ -1,335 +1,149 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Typography, Card } from 'antd'
+import { Row, Typography, Button, Checkbox } from 'antd'
 import { RootState } from '../../store/root'
+import { MatchItem } from './MatchItem'
+import { Property, Investor } from '../../types'
+import { MatchedItem } from '../../store/selectors'
 
 interface IProps {
+  properties: Property[]
+  investors: Investor[]
+  // matches: any[]
+}
 
+interface IMatchItem {
+  id: string
+  name: string
+  investors: MatchedItem[]
 }
 
 const MatchesView: React.FC<IProps> = ({
-  
+  properties,
+  investors,
+  // matches
 }) => {
+  const [matches, setMatches] = useState<any>([])
+  const [params, setParams] = useState<any>(["price"]) // must be spelled exactly
+  const [hideUnmatched, setHideUnmatched] = useState<boolean>(false)
+  const [matchesActive, setMatchesActive] = useState<boolean>(false) // false only at startup
+
+  let matchCount: number = 0
+
+  const handleCheckChange = (e: any) => {
+    // e.target.checked
+    setHideUnmatched(e.target.checked)
+  }
+
+  const handleParamsChange = (value: any, addOrSub: string) => {
+    if(addOrSub==='add'){
+      // add value to array
+      setParams({
+        ...params,
+        value
+      })
+    }
+    else if(addOrSub==='sub') {
+      setParams(params.filter((param: string) => param !== value))
+    }
+  }
+
+  const getMatches = () => {
+    if(!matchesActive) setMatchesActive(true)
+    // for each property (map),
+    let propertyMatches = properties.map((property, index) => {
+      // check all investors for given parameters (filter), attach to property
+      let matchedInvestors : MatchedItem[] = [] // id, name
+      for(let i=0; i<params.length; i++) {
+        let param = params[i]
+        console.log('adding with param:', param)
+        let tempInvestors = findInvestorsWithParam(param, property)
+        console.log(param, ' returned investors array:', tempInvestors)
+        // filter through investors for param, concat to matchedInvestors
+        // let tempInvestors = investors.map((investor, index) => {
+          //   if(investor)
+          // })
+          // check if investor already found in investors before adding
+        if(tempInvestors.length > 0)
+          //@ts-ignore
+          matchedInvestors.concat(tempInvestors)
+      }
+        
+      console.log('matched investors:', matchedInvestors)
+      // create new match object with just the property id and name
+      let newProperty = {
+        id: property.id!,
+        name: property.name,
+        investors: matchedInvestors
+      }
+
+      // return object
+      return newProperty
+    })
+
+    console.log('propertyMatches:', propertyMatches)
+    setMatches(propertyMatches)
+  }
+
+  const findInvestorsWithParam = (param: string, property: Property) => {
+    switch(param) {
+      case 'price':
+        console.log('property price:', property.price)
+        return investors.map(investor => {
+          if(investor.priceMin < property.price && investor.priceMax > property.price) {
+            return {
+              id: investor.id!,
+              name: `${investor.firstName} ${investor.lastName}`
+            }
+          }
+        })
+        // console.log('investorsMatched:', investorsMatched)
+      default:
+        return []
+    }
+  }
+
   return (
     <div>
       <Typography.Title level={3} style={{textAlign:'center'}}>
         Matches</Typography.Title>
+      <Button type="primary" onClick={getMatches}>Get Matches</Button>
+      <div style={{margin:5}}>
+        <Typography.Paragraph>
+          Hide Unmatched Properties? 
+          <Checkbox checked={hideUnmatched} onChange={handleCheckChange} />
+        </Typography.Paragraph>
+      </div>
+      {matchesActive ? (
+        <Typography.Paragraph>
+          Showing {hideUnmatched ? matchCount : matches.length} matched properties
+        </Typography.Paragraph>
+      ) : (
+        <Typography.Paragraph>Click "Get Matches" to see all property matches</Typography.Paragraph>
+      )}
       <Row gutter={[16,16]}>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8} md={6}>
-          <Card style={{textAlign:'center'}}>
-            <Typography.Title level={4}>
-              Property</Typography.Title>
-            <ul style={{listStyle:'none', paddingLeft:0}}>
-              <li>investor 1</li>
-              <li>investor 2</li>
-              <li>investor 3</li>
-            </ul>
-          </Card>
-        </Col>
+        {matches.map((matchItem: IMatchItem, index: number) => {
+          if(!hideUnmatched || matchItem.investors.length > 0) {
+            matchCount++
+            return (
+              <MatchItem 
+                key={index}
+                id={matchItem.id}
+                name={matchItem.name}
+                investors={matchItem.investors}
+              />
+            )
+          }
+        })}
       </Row>
     </div>
   )
 }
 
 const mapStateToProps = (state: RootState) => ({
-  //matches: getMatches() // selector
+  properties: state.properties.properties,
+  investors: state.investors.investors,
+  // matches: getMatches() // selector
 })
 
 export const Matches = connect(

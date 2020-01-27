@@ -14,11 +14,10 @@ export interface MatchedInvestor extends Investor {
 }
 
 // Selectors
-export const selectInvestorsByState = (state: RootState) => {
+export const selectInvestorsByFilter = (state: RootState) => {
   // use state in rootstate for this
   
 }
-
 
 export const getMatchedProperties = (state: RootState) => {
   console.log('called getMatchedProperties with params:', state.matching.params)
