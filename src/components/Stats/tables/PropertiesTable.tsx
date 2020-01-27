@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import styled from 'styled-components'
-import { Table, Divider } from 'antd'
+// import styled from 'styled-components'
+import { Table } from 'antd'
 import { Property } from '../../../types'
 
 interface IProps {

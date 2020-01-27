@@ -7,8 +7,8 @@ import { Row, Col, Card, Typography, Tabs } from 'antd'
 import { PropertiesTable, InvestorsTable, BrokersTable } from './tables'
 // import redux
 import { RootState } from '../../store/root'
-import { updateProperty, deleteProperty } from '../../store/properties/actions'
-import { updateInvestor, deleteInvestor } from '../../store/investors/actions'
+import { updateProperty, deleteProperty } from '../../store/properties'
+import { updateInvestor, deleteInvestor } from '../../store/investors'
 import { updateBroker, deleteBroker } from '../../store/brokers/actions'
 import { Property, Investor, Broker } from '../../types'
 

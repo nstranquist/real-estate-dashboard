@@ -6,7 +6,7 @@ import { updateParams } from '../../store/matching/matching'
 // import { QueryList } from './QueryList'
 import { RootState } from '../../store/root'
 import { getMatchedProperties, getMatchedInvestors, MatchedProperty, MatchedInvestor } from '../../store/selectors'
-import { Property, Investor } from '../../types'
+// import { Property, Investor } from '../../types'
 
 interface IProps {
   params: string[]

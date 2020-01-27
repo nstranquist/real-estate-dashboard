@@ -7,7 +7,7 @@ import { PropertiesTable } from '../../Stats/tables';
 import { Property } from '../../../types'
 // import redux
 import { RootState } from '../../../store/root'
-import { addProperty, updateProperty, deleteProperty, uploadProperties } from '../../../store/properties/actions'
+import { addProperty, updateProperty, deleteProperty, uploadProperties } from '../../../store/properties'
 
 
 interface IProps {
